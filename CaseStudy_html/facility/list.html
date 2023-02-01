@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="~{layout :: head('Service')}">
+<head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css.css">
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .bgimg{
+            background-image: url("https://i.ytimg.com/vi/2fCoOx9W4NQ/maxresdefault.jpg");
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-<div th:replace="~{layout :: header}"></div>
+<div>
+    <div class="row modalbg">
+        <ul class="nav justify-content-center">
+            <li  class="nav-item " style="margin-left: 100px">
+                <img src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" height="100" width="75">
+            </li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li  class="nav-item " style="margin-left: 100px">
+                <div class="card" style="width: 8rem;height: 6rem">
+                    <img src="https://truevaluevietnam.com/wp-content/uploads/2015/10/TA_brand_logo.png" height="55"
+                         class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                    </div>
+                </div>
+            </li>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li  style="margin-left: 100px"  class="nav-item ">
+                <p style="display: inline">
+                    103 - 105 Vo Nguyen Giap Street, Khue <br>
+                    My Ward, Ngu Hanh Son District, Danang <br>
+                    City, Vietnam <br>
+                    7,0 km from Danang <Airport></Airport>
+                </p>
+            </li> &nbsp;&nbsp;
+
+        </ul>
+    </div>
+</div>
 <div class="row">
     <nav class="navbar navbar-light" style="background-color: teal">
         <div class="container-fluid" style="position: relative">
@@ -28,75 +72,147 @@
 </div>
 <div class="bgimg">
     <br> <br> <br>
-    <div id="resultFind" style="backdrop-filter: blur(10px);color: aliceblue;font-weight: bold;width: 100%">
-        <center>
-            <h1 style="padding: 30px 0" th:if="${nameFind != ''}" th:text="${'Không tìm thấy tên ' + nameFind} "></h1>
-            <h1 style="padding: 30px 0" th:if="${typeFind != ''}" th:text="${'Không tìm thấy kiểu ' + typeFind} "></h1>
-        </center>
-    </div>
-    <div id="checkTable">
-        <table class="table" style="backdrop-filter: blur(10px);color: aliceblue;font-weight: bold">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Tên Dịch Vụ</th>
-                <th>Diện Tích</th>
-                <th>Đơn Giá</th>
-                <th>Số Người(Max)</th>
-                <th>Kiểu Thuê</th>
-                <th>Loại Dịch Vụ</th>
-                <th>Tiêu Chuẩn Phòng</th>
-                <th>Mô Tả</th>
-                <th>Diện Tích Hồ Bơi</th>
-                <th>Số Tầng</th>
-                <th>Dịch Vụ Miễn Phí</th>
-                <th>Sửa</th>
-                <th>Xóa</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="facility ,status : ${list}">
-                <td th:text="${status.count + list.number * list.size}"></td>
-                <td th:text="${facility.name}"></td>
-                <td th:text="${facility.area}"></td>
-                <td th:text="${facility.cost}"></td>
-                <td th:text="${facility.maxPeople}"></td>
-                <td th:text="${facility.rentType.name}"></td>
-                <td th:text="${facility.facilityType.name}"></td>
-                <td th:text="${facility.standardRoom}"></td>
-                <td th:text="${facility.descriptionOtherConvenience}"></td>
-                <td th:text="${facility.poolArea}"></td>
-                <td th:text="${facility.numberOfFloor}"></td>
-                <td th:text="${facility.facilityFree}"></td>
-                <td>
-                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editmodal"
-                            th:attr="onclick=|updateFacility('${facility.id}','${facility.name}','${facility.area}','${facility.cost}','${facility.maxPeople}','${facility.rentType.id}','${facility.facilityType.id}','${facility.standardRoom}','${facility.descriptionOtherConvenience}','${facility.poolArea}','${facility.numberOfFloor}','${facility.facilityFree}')|">
-                        <i class="fa-sharp fa-solid fa-hammer"></i>
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deletemodal"
-                            th:attr="onclick=|deleteModal('${facility.id}','${facility.name}')|">
-                        <i class="fa-sharp fa-solid fa-store-slash"></i>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+
+   <div style="width: 100%;">
+       <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+           <img src="https://motortrip.vn/wp-content/uploads/2022/03/khach-san-17.jpg" class="card-img-top" alt="...">
+           <div class="card-body" >
+               <p class="card-text" style="font-weight: bold;font-size: 20px">Armani Hotel</p>
+               <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+           </div>
+       </div>
+       <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+           <img src="https://vcdn1-dulich.vnecdn.net/2022/07/29/hypat-1659069584-1659081355.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=ateHKAAnu32uybgAOx-emA" class="card-img-top" alt="...">
+           <div class="card-body">
+               <p class="card-text" style="font-weight: bold;font-size: 20px">Boscolo Exedra</p>
+               <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+           </div>
+       </div>
+       <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+           <img src="https://pix10.agoda.net/hotelImages/2817185/-1/4406a970306a452300f94532410dab2c.jpg?ca=10&ce=1&s=1024x768" class="card-img-top" alt="...">
+           <div class="card-body">
+               <p class="card-text" style="font-weight: bold;font-size: 20px">OrchidHeaven</p>
+               <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+           </div>
+       </div>
+       <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+           <img src="https://hoanghaihotel.vn/Data/images/tintuc/10032021170917-gioi-thieu-ve-khach-san-hoang-hai.jpg" class="card-img-top" alt="...">
+           <div class="card-body">
+               <p class="card-text" style="font-weight: bold;font-size: 20px">Hotel Areias do Seixo</p>
+               <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+           </div>
+       </div> <br> <br>
+       <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+           <img src="https://hanoihotel.com.vn/wp-content/uploads/sites/97/2020/04/hanoi-hotel17942.jpg" class="card-img-top" alt="...">
+           <div class="card-body">
+               <p class="card-text" style="font-weight: bold;font-size: 20px">Motel Magic</p>
+               <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+           </div>
+       </div>
+       <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+           <img src="https://i.ex-cdn.com/nhadautu.vn/files/content/2020/05/08/kinh-doanh-khach-san-1-2149.jpg" class="card-img-top" alt="...">
+           <div class="card-body">
+               <p class="card-text" style="font-weight: bold;font-size: 20px">Hotel Villa Honegg</p>
+               <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+           </div>
+       </div>
+       <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+           <img src="https://vcdn1-dulich.vnecdn.net/2021/05/14/stunning-sunset-at-the-1620959674-1620963331.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=RAP72v1BULO6wM4YrQx1sg" class="card-img-top" alt="...">
+           <div class="card-body">
+               <p class="card-text" style="font-weight: bold;font-size: 20px">Lover’s Deep Luxury</p>
+               <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+           </div>
+       </div>
+       <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+           <img src="https://mixhotel.vn/uploads/images/62abe8ead6a5eb614f4bdc08/khach-san-tinh-yeu-trung-son__6_.webp" class="card-img-top" alt="...">
+           <div class="card-body">
+               <p class="card-text" style="font-weight: bold;font-size: 20px">Trinity Energy</p>
+               <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+
+           </div>
+       </div> <br> <br>
+
+   </div>
+    <br> <br>
         <center>
             <a class="btn btn-light" id="preButton">Previous</a>
-            <span class="btn btn-outline-light" th:text="${list.number}"></span>
+            <span class="btn btn-outline-light" >1</span>
             <a class="btn btn-light" id="nexButton">Next</a>
+            <br> <br>   <br> <br>
         </center>
     </div>
-    <input type="hidden" id="typeSearh" th:value="${typeFind}">
-    <input type="hidden" id="nameSearh" th:value="${nameFind}">
-    <input type="hidden" id="hasPre" th:value="${list.hasPrevious()}">
-    <input type="hidden" id="pre" th:value="${list.number -1}">
-    <input type="hidden" id="nex" th:value="${list.number +1}">
-    <input type="hidden" id="hasNex" th:value="${list.hasNext()}">
-    <input type="hidden" id="isEmpty" th:value="${isEmpty}">
-    <div th:replace="~{layout :: footer}"></div>
+
+<div>
+    <div style="background: cadetblue;margin-top: 80px" class="row">
+        <div class="col-1" style="background: cadetblue"></div>
+        <div class="col-3" style="background: #bcbebf">
+            <h1 style="color: darkkhaki;text-align: center;margin-top: 30px">How to Get to Us</h1>
+            <p style="text-align: center;text-align: left">Furama is a premier base for exploring one of<br> Asia's most
+                exciting new destinations. Just a<br> short drive
+                from Danang lay four UNESCO-listed<br> World Heritage Sites:</p>
+            <h1><a href="#" class="btn" style="color: white;background: teal"><i class="fa-sharp fa-solid fa-location-dot"> &ensp;View On Map</i></a>
+            </h1>
+            <h2 style="color: darkkhaki">Local Places</h2>
+            <br>
+            <p><b>1. The former imperial city of HUE &ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;2 hours</b></p>
+            <hr>
+            <p><b>2. The ancient Hoi An &ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;30
+                minutes</b></p>
+            <hr>
+            <p><b>3. Champa civilization, My Son &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;90 minutes</b></p>
+            <hr>
+            <p><b>4. Phong Nha Caves &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                3 hours</b></p>
+        </div>
+        <div class="col-3" style="margin-top: 30px;text-align: center">
+            <a style="color: #5c636a;text-decoration: none" href="">News</a>
+            <br>
+            <br>
+            <a style="color: #5c636a;text-decoration: none" href="">Rack rate</a>
+            <br>
+            <br>
+            <a style="color: #5c636a;text-decoration: none" href="">Lifestyle Bog</a>
+            <br>
+            <br>
+            <a style="color: #5c636a;text-decoration: none" href="">Work with us</a>
+            <br>
+            <br>
+            <a style="color: #5c636a;text-decoration: none" href="">Contact us</a>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div style="margin-left: 130px"><img
+                    src="https://furamavietnam.com/wp-content/uploads/2019/02/Ariyana-Tourism-Complex-02-2.png"
+                    width="760" height="90"></div>
+        </div>
+        <div class="col-4" style="margin-top: 40px">
+            <h5 style="color: darkkhaki;">Contact US</h5>
+            <br>
+            <p style="font-size: 17px">
+                <i class="fa-sharp fa-solid fa-location-dot"></i>
+                103 - 105 Vo Nguyen Giap Street, Khue My Ward, Ngu Hanh Son<br> District, Danang City, Vietnam<br>
+                Tel.: 84-236-3847 333/888 * Fax: 84-236-3847 666<br>
+                Email: reservation@furamavietnam.com *<a href="https://furamavietnam.com/undefined/" style="color: black;text-decoration: none">www.furamavietnam.com</a> <br> GDS Codes: Amadeus-GD DADFUR,
+                Galileo/Apollo-GD 16236<br>, Sabre-GD 032771, Worldspan- GD DADFU
+            </p>
+            <hr>
+            <a href="https://www.facebook.com/furamaresort/"><img
+                    src="https://furamavietnam.com/wp-content/uploads/2019/06/incon-Facbook-1.png"></a>
+            <a href="https://www.instagram.com/furama_resort_and_villas/?hl=vi"><img src="https://furamavietnam.com/wp-content/uploads/2019/06/social-ins.png"></a>
+            <a href="https://www.youtube.com/user/furamaresortvietnam/featured"><img src="https://furamavietnam.com/wp-content/uploads/2021/10/social-youtube.png"></a>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p style="margin-left: 300px">© 2018 Furama Resort Danang </p>
+        </div>
+    </div>
+</div>
 </div>
 <div class="modal " tabindex="-1" id="addmodal">
     <div class="modal-dialog modal-xl">
