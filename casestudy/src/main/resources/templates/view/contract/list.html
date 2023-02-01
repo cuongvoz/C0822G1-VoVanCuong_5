@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{layout :: head('Contact')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{layout :: header}"></div>
+<div class="row">
+    <nav class="navbar navbar-light" style="background-color: teal">
+        <div class="container-fluid" style="position: relative">
+            <a class="navbar-brand"
+               th:href="@{/}">Home</a>
+
+            <button class="btn btn-light" style="position: absolute;left: 100px" data-bs-toggle="modal"
+                    data-bs-target="#addmodal">Tạo Hợp Đồng
+            </button>
+            <form action="/contract/find" method="get" style="position:absolute ;top: 1px;right: 30px"
+                  class="d-flex">
+                <input class="form-control me-2" type="search" name="facility" placeholder="Dịch Vụ"
+                       aria-label="Search">
+                <input class="form-control me-2" type="search" name="customer" placeholder="Khách Hàng"
+                       aria-label="Search">
+                <input class="form-control me-2" type="search" name="employee" placeholder="Nhân Viên"
+                       aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Tìm</button>
+            </form>
+        </div>
+    </nav>
+</div>
+<div class="bgimg">
+    <br> <br> <br>
+    <table class="table" style="backdrop-filter: blur(10px);color: aliceblue;font-weight: bold">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Dịch Vụ</th>
+            <th>Nhân Viên</th>
+            <th>Khách Hàng</th>
+            <th>Ngày Bắt Đầu</th>
+            <th>Ngày Kết Thúc</th>
+            <th>Tiền Đặt Cọc</th>
+            <th>Tổng Tiền</th>
+            <th>Các Dịch Vụ Đi Kèm</th>
+        </tr>
+        </thead>
+        <tbody id="my-body">
+        </tbody>
+    </table>
+    <div th:replace="~{layout :: footer}"></div>
+</div>
+<div class="modal" tabindex="-1" id="addDetail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm dịch vụ đi kèm <i class="fa-sharp fa-solid fa-user"></i></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/contract/add}" method="post" th:object="${contractDetail}">
+
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Dịch Vụ</label>
+                        <div class="col-sm-10">
+                            <select th:field="*{attachFacility}" id="attachFacilityAdd" class="form-control">
+                                <option th:each="facility : ${listAttach}" th:text="${facility.name}"
+                                        th:value="${facility.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Số Lượng</label>
+                        <input type="hidden" th:field="*{contract}" id="contractIdAdd">
+                        <div class="col-sm-10">
+                            <input type="number" id="quantityAdd" class="form-control" th:field="*{quantity}">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" onclick="addContractDetail()" class="btn btn-primary">Thêm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="viewAttachFacility">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dịch Vụ Đi Kèm Của Hợp Đồng Này</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <input type="hidden" th:value="${modal}" id="modalCheck">
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Dịch Vụ</th>
+                        <th>Đơn Giá</th>
+                        <th>Xuất</th>
+                        <th>Trạng Thái</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng Tiền</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableAttachFacilityNew">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Thoát</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="addmodal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tạo Hợp Đồng <i class="fa-sharp fa-solid fa-user"></i></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/contract/addContract}" method="post" th:object="${contract}">
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Ngày Bắt Đầu</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="addStartDate" th:field="*{startDate}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Ngày Kết Thúc</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="addEndDate" th:field="*{endDate}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Tiền Gửi</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" onchange="validate()" id="addDeposit" th:field="*{deposit}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Tổng Tiền</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" readonly id="tongTien">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Khách Hàng</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="addCutomer" th:field="*{customer}">
+                                <option th:each="customer : ${customerList}" th:text="${customer.name}"
+                                        th:value="${customer.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Nhân Viên</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="addEmployee" th:field="*{employee}">
+                                <option th:each="employee : ${employeeList}" th:text="${employee.name}"
+                                        th:value="${employee.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Dịch Vụ</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="addFacility" th:field="*{facility}">
+                                <option th:each="facility : ${facilityList}" th:text="${facility.name}"
+                                        th:value="${facility.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" onclick="addContract()" class="btn btn-primary">Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="editModal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thay Đổi Hợp Đồng <i class="fa-sharp fa-solid fa-user"></i></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/contract/addContract}" method="post" th:object="${contract}">
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Ngày Bắt Đầu</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="startNewDate" th:field="*{startDate}">
+                            <input type="hidden" class="form-control" id="idEdit" th:field="*{id}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Ngày Kết Thúc</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="endNewEdit" th:field="*{endDate}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Tiền Gửi</label>
+                        <div class="col-sm-10">
+                            <input type="number" id="depositEdit" class="form-control" th:field="*{deposit}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Tổng Tiền</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" readonly id="tongTienEdit">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Khách Hàng</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="customerEdit" th:field="*{customer}">
+                                <option th:each="customer : ${customerList}" th:text="${customer.name}"
+                                        th:value="${customer.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Nhân Viên</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="employeeEdit" th:field="*{employee}">
+                                <option th:each="employee : ${employeeList}" th:text="${employee.name}"
+                                        th:value="${employee.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Dịch Vụ</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="facilityEdit" th:field="*{facility}">
+                                <option th:each="facility : ${facilityList}" th:text="${facility.name}"
+                                        th:value="${facility.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Dịch Vụ Đi Kèm</label>
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary" onclick="addAttach()" data-bs-toggle="modal"
+                                    data-bs-target="#addDetail">+
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" onclick="updateContract2()" class="btn btn-primary">Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+  function validate() {
+      let deposit = document.getElementById("")
+      if (deposit < 1) {
+          $('#addDeposit').style.borderColor = "red";
+      } else {
+          $('#addDeposit').style.borderColor = "green";
+      }
+  }
+    function updateContract2() {
+        let id = $('#idEdit').val();
+        let startDate = $('#startNewDate').val();
+        let endDate = $('#endNewEdit').val();
+        let deposit = $('#depositEdit').val();
+        let facilitiy = $('#facilityEdit').val();
+        let employee = $('#employeeEdit').val();
+        let customer = $('#customerEdit').val();
+        let contract = {
+            id: id,
+            startDate: startDate,
+            endDate: endDate,
+            deposit: deposit,
+            customer: customer,
+            employee: employee,
+            facility: facilitiy
+        }
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'POST',
+            data: JSON.stringify(contract),
+            url: 'contracts/update',
+            success: function () {
+                $('#editModal').modal('hide')
+                init()
+
+            }
+
+        })
+    }
+
+    init()
+
+    function init() {
+        $.ajax({
+            type: 'GET',
+            url: '/contracts',
+            success: function (data) {
+                let table = ''
+                for (let i = 0; i < data.length; i++) {
+                    table += `
+                 <tr>
+                 <th>${i + 1}</th>
+                 <th>${data[i].facility.name}</th>
+                 <th>${data[i].employee.name}</th>
+                 <th>${data[i].customer.name}</th>
+                 <th>${data[i].startDate}</th>
+                 <th>${data[i].endDate}</th>
+                 <th>${data[i].deposit}</th>
+                 <th>${data[i].total}</th>
+                 <th>
+                 <button class="btn btn-outline-light"  data-bs-toggle="modal" data-bs-target="#editModal" onclick="updateContract(${data[i].id}, '${data[i].startDate}', '${data[i].endDate}', ${data[i].deposit}, ${data[i].employee.id}, ${data[i].customer.id}, ${data[i].facility.id},${data[i].total})">+</button>
+                 <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility" onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm</button>
+                 </th>
+
+                 `
+                }
+                $('#my-body').html(table)
+            }
+        })
+    }
+
+    function addContractDetail() {
+        // id, startDate, endDate, deposit, employee, customer, facility,total
+
+
+        let contractId = $('#contractIdAdd').val();
+        let quantity = $('#quantityAdd').val();
+        let attachId = $('#attachFacilityAdd').val();
+        let contractDetail = {
+            contractId: contractId,
+            quantity: quantity,
+            attachId: attachId
+        }
+        $.ajax({
+            headers: {
+                'Accect': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'POST',
+            data: JSON.stringify(contractDetail),
+            url: '/contracts/createDetail',
+            success: function () {
+                $('#addDetail').modal('hide')
+                init()
+                $(document).ready(
+                    function () {
+                        $('#editModal').appendTo('body').modal('show')
+                    }
+                )
+            }
+        })
+
+    }
+
+    function changeMoney(money) {
+        document.getElementById("tongTienEdit").value = money;
+    }
+
+    function addContract() {
+        let start = $('#addStartDate').val();
+        let end = $('#addEndDate').val();
+        let deposit = $('#addDeposit').val();
+        let customer = $('#addCutomer').val();
+        let employee = $('#addEmployee').val();
+        let facility = $('#addFacility').val();
+        let contract = {
+            startDate: start,
+            endDate: end,
+            deposit: deposit,
+            employee: employee,
+            customer: customer,
+            facility: facility
+        };
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'POST',
+            data: JSON.stringify(contract),
+            url: "/contracts/create",
+            success: function () {
+                $('#addmodal').modal('hide')
+                init()
+            }
+        })
+
+    }
+
+    function showListAttachFacility(id) {
+        $.ajax({
+            type: "GET",
+            url: "/contracts/view/" + id,
+            success: function (data) {
+                let table = ''
+                let x = 0;
+                for (let i = 0; i < data.length; i++) {
+                    x += data[i].total;
+                    table += `
+                    <tr>
+                         <th>${i + 1}</th>
+                        <th>${data[i].name}</th>
+                        <th>${data[i].cost}</th>
+                        <th>${data[i].unit}</th>
+                        <th>${data[i].status}</th>
+                        <th>${data[i].quantity}</th>
+                        <th>${data[i].total}</th>
+                    </tr>`
+                }
+                table += `</tr>
+                 <tr>
+                 <th colspan="4">Tổng Thành Tiền:</th>
+                 <th></th>
+                 <th></th>
+                 <th>${x}</th>
+                 </tr>
+                    `
+
+                $('#tableAttachFacilityNew').html(table)
+            }
+        })
+    }
+
+    function updateContract(id, startDate, endDate, deposit, employee, customer, facility, total) {
+        document.getElementById("idEdit").value = id;
+        document.getElementById("startNewDate").value = startDate;
+        document.getElementById("endNewEdit").value = endDate;
+        document.getElementById("depositEdit").value = deposit;
+        document.getElementById("employeeEdit").value = employee;
+        document.getElementById("customerEdit").value = customer;
+        document.getElementById("facilityEdit").value = facility;
+        document.getElementById("tongTienEdit").value = total;
+    }
+
+    function addAttach() {
+        let id = document.getElementById("idEdit").value;
+        document.getElementById("contractIdAdd").value = id;
+    }
+
+    let modal = document.getElementById("modalCheck").value;
+    if (modal == "true") {
+        $(document).ready(
+            function () {
+                $('#viewAttachFacility').appendTo('body').modal('show')
+            }
+        )
+    }
+</script>
+</html>

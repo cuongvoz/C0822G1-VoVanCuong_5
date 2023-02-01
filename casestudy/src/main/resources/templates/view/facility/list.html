@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{layout :: head('Service')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{layout :: header}"></div>
+<div class="row">
+    <nav class="navbar navbar-light" style="background-color: teal">
+        <div class="container-fluid" style="position: relative">
+            <a class="navbar-brand"
+               th:href="@{/}">Home</a>
+
+            <button class="btn btn-light" style="position: absolute;left: 100px" data-bs-toggle="modal"
+                    data-bs-target="#addmodal">Thêm Dịch Vụ
+            </button>
+            <form th:action="@{/facility/find}" method="get" style="position:absolute ;top: 1px;right: 30px"
+                  class="d-flex">
+                <input class="form-control me-2" type="search" name="name" placeholder="Tên Dịch Vụ"
+                       aria-label="Search">
+                <input class="form-control me-2" type="search" name="type" placeholder="Loại Dịch Vụ"
+                       aria-label="Searcase_studych">
+                <button class="btn btn-outline-light" type="submit">Tìm</button>
+            </form>
+        </div>
+    </nav>
+</div>
+<div class="bgimg">
+    <br> <br> <br>
+    <div id="resultFind" style="backdrop-filter: blur(10px);color: aliceblue;font-weight: bold;width: 100%">
+        <center>
+            <h1 style="padding: 30px 0" th:if="${nameFind != ''}" th:text="${'Không tìm thấy tên ' + nameFind} "></h1>
+            <h1 style="padding: 30px 0" th:if="${typeFind != ''}" th:text="${'Không tìm thấy kiểu ' + typeFind} "></h1>
+        </center>
+    </div>
+    <div id="checkTable">
+        <table class="table" style="backdrop-filter: blur(10px);color: aliceblue;font-weight: bold">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Tên Dịch Vụ</th>
+                <th>Diện Tích</th>
+                <th>Đơn Giá</th>
+                <th>Số Người(Max)</th>
+                <th>Kiểu Thuê</th>
+                <th>Loại Dịch Vụ</th>
+                <th>Tiêu Chuẩn Phòng</th>
+                <th>Mô Tả</th>
+                <th>Diện Tích Hồ Bơi</th>
+                <th>Số Tầng</th>
+                <th>Dịch Vụ Miễn Phí</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="facility ,status : ${list}">
+                <td th:text="${status.count + list.number * list.size}"></td>
+                <td th:text="${facility.name}"></td>
+                <td th:text="${facility.area}"></td>
+                <td th:text="${facility.cost}"></td>
+                <td th:text="${facility.maxPeople}"></td>
+                <td th:text="${facility.rentType.name}"></td>
+                <td th:text="${facility.facilityType.name}"></td>
+                <td th:text="${facility.standardRoom}"></td>
+                <td th:text="${facility.descriptionOtherConvenience}"></td>
+                <td th:text="${facility.poolArea}"></td>
+                <td th:text="${facility.numberOfFloor}"></td>
+                <td th:text="${facility.facilityFree}"></td>
+                <td>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editmodal"
+                            th:attr="onclick=|updateFacility('${facility.id}','${facility.name}','${facility.area}','${facility.cost}','${facility.maxPeople}','${facility.rentType.id}','${facility.facilityType.id}','${facility.standardRoom}','${facility.descriptionOtherConvenience}','${facility.poolArea}','${facility.numberOfFloor}','${facility.facilityFree}')|">
+                        <i class="fa-sharp fa-solid fa-hammer"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#deletemodal"
+                            th:attr="onclick=|deleteModal('${facility.id}','${facility.name}')|">
+                        <i class="fa-sharp fa-solid fa-store-slash"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <center>
+            <a class="btn btn-light" id="preButton">Previous</a>
+            <span class="btn btn-outline-light" th:text="${list.number}"></span>
+            <a class="btn btn-light" id="nexButton">Next</a>
+        </center>
+    </div>
+    <input type="hidden" id="typeSearh" th:value="${typeFind}">
+    <input type="hidden" id="nameSearh" th:value="${nameFind}">
+    <input type="hidden" id="hasPre" th:value="${list.hasPrevious()}">
+    <input type="hidden" id="pre" th:value="${list.number -1}">
+    <input type="hidden" id="nex" th:value="${list.number +1}">
+    <input type="hidden" id="hasNex" th:value="${list.hasNext()}">
+    <input type="hidden" id="isEmpty" th:value="${isEmpty}">
+    <div th:replace="~{layout :: footer}"></div>
+</div>
+<div class="modal " tabindex="-1" id="addmodal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm mới dịch vụ <i class="fa-sharp fa-solid fa-user"></i></h5>
+                <button type="button"  class="btn-close clearError" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/facility/add}" method="post" th:object="${facility}">
+                    <input type="hidden" name="validate" value="add">
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Loại Dịch Vụ</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" onchange="facility()" id="selectValue"
+                                    th:field="*{facilityType}">
+                                <option th:each="item : ${listType}" th:text="${item.name}"
+                                        th:value="${item.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Tên Dịch Vụ</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{name}">
+                            <p th:errors="*{name}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Diện Tích</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" th:field="*{area}">
+                            <p th:errors="*{area}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Chi Phí Thuê</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" th:field="*{cost}">
+                            <p th:errors="*{cost}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Số Người Tối Đa</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" th:field="*{maxPeople}">
+                            <p th:errors="*{maxPeople}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Kiểu Thuê</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" th:field="*{rentType}">
+                                <option th:each="item : ${listRent}" th:text="${item.name}"
+                                        th:value="${item.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row" id="standardAdd">
+                        <label class="col-sm-2 col-form-label">Tiêu Chuẩn Phòng</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{standardRoom}">
+                            <p th:errors="*{standardRoom}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" id="descriptionAdd">
+                        <label class="col-sm-2 col-form-label">Mô Tả Khác</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{descriptionOtherConvenience}">
+                            <p th:errors="*{descriptionOtherConvenience}" class="text-danger clear"
+                               style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" id="poolAreaAdd">
+                        <label class="col-sm-2 col-form-label">Diện Tích Hồ Bơi</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" th:field="*{poolArea}">
+                            <p th:errors="*{poolArea}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" id="numberOfFloorAdd">
+                        <label class="col-sm-2 col-form-label">Số Tầng</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" th:field="*{numberOfFloor}">
+                            <p th:errors="*{numberOfFloor}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row d-none" id="addFreeService">
+                        <label class="col-sm-2 col-form-label">Dịch Vụ Miễn Phí</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{facilityFree}">
+                            <p th:errors="*{facilityFree}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-secondary clearError" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit"  class="btn btn-primary">Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="deletemodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác Nhận Xóa</h5>
+                <button type="button" class="btn-close clearError" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/facility/delete}" method="post">
+                <div class="modal-body">
+                    <p>B?n có chắn chắn muốn xóa dịch vụ <b><span id="nameDelete"></span> </b> ?</p>
+                </div>
+                <input type="hidden" name="id" id="idDelete">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary clearError" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Xóa</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="editmodal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sửa thông tin dịch vụ <i class="fa-sharp fa-solid fa-user"></i></h5>
+                <button type="button"  class="btn-close clearError" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/facility/add}" method="post" th:object="${facility}">
+                    <input type="hidden" name="validate" value="edit">
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Tên Dịch Vụ</label>
+                        <div class="col-sm-10">
+                            <input type="hidden" class="form-control" id="idEdit" th:field="*{id}">
+                            <input type="text" class="form-control" id="nameEdit" th:field="*{name}">
+                            <p th:errors="*{name}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Diện Tích</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="areaEdit" th:field="*{area}">
+                            <p th:errors="*{area}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Chi Phí Thuê</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="costEdit" th:field="*{cost}">
+                            <p th:errors="*{cost}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Số Người Tối Đa</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="maxPeopleEdit" th:field="*{maxPeople}">
+                            <p th:errors="*{maxPeople}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Kiểu Thuê</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="rentTypeEdit" th:field="*{rentType}">
+                                <option th:each="item : ${listRent}" th:text="${item.name}"
+                                        th:value="${item.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Loại Dịch Vụ</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="facilityTypeEdit" onchange="newUpdate()"
+                                    th:field="*{facilityType}">
+                                <option th:each="item : ${listType}" th:text="${item.name}"
+                                        th:value="${item.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" id="standardEditCheck">
+                        <label class="col-sm-2 col-form-label">Tiêu Chuẩn Phòng</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="standardEdit" th:field="*{standardRoom}">
+                            <p th:errors="*{standardRoom}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" id="descriptionEditCheck">
+                        <label class="col-sm-2 col-form-label">Mô Tả Khác</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="descriptionEdit"
+                                   th:field="*{descriptionOtherConvenience}">
+                            <p th:errors="*{descriptionOtherConvenience}" class="text-danger clear"
+                               style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" id="poolAreaEdit">
+                        <label class="col-sm-2 col-form-label">Diện Tích Hồ Bơi</label>
+                        <div class="col-sm-10">
+                            <input type="number" id="poolEdit" class="form-control" th:field="*{poolArea}">
+                            <p th:errors="*{poolArea}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" id="numberOfFloorEdit">
+                        <label class="col-sm-2 col-form-label">Số Tầng</label>
+                        <div class="col-sm-10">
+                            <input type="number" id="numberFloorEdit" class="form-control"
+                                   th:field="*{numberOfFloor}">
+                            <p th:errors="*{numberOfFloor}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3 row d-none" id="editFreeService">
+                        <label class="col-sm-2 col-form-label">Dịch Vụ Miễn Phí</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="facilityFreeEdit" th:field="*{facilityFree}">
+                            <p th:errors="*{facilityFree}" class="text-danger clear" style="font-weight: bold"></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-secondary clearError" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="checkValidate" th:value="${validate}">
+<input type="hidden" id="typezCheck" th:value="${typez}">
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $(".clearError").click(function(){
+        $(".clear").hide();
+    });
+
+    let typeId = $('#typezCheck').val();
+    let validate = $('#checkValidate').val();
+    switch (validate) {
+        case "add":
+            $(document).ready(
+                function () {
+                    $('#addmodal').appendTo('body').modal('show')
+                }
+            );
+            switch (typeId) {
+                case "1":
+                    document.getElementById("standardAdd").className = "mb-3 row";
+                    document.getElementById("descriptionAdd").className = "mb-3 row";
+                    document.getElementById("addFreeService").className = "d-none"
+                    document.getElementById("numberOfFloorAdd").className = "mb-3 row"
+                    document.getElementById("poolAreaAdd").className = "mb-3 row";
+                    document.getElementById("selectValue").value = 1;
+                    break
+                case "2":
+                    document.getElementById("standardAdd").className = "mb-3 row";
+                    document.getElementById("descriptionAdd").className = "mb-3 row";
+                    document.getElementById("addFreeService").className = "d-none"
+                    document.getElementById("numberOfFloorAdd").className = "mb-3 row";
+                    document.getElementById("poolAreaAdd").className = "d-none";
+                    document.getElementById("selectValue").value = 2;
+                    break
+                case "3":
+                    document.getElementById("standardAdd").className = "d-none";
+                    document.getElementById("descriptionAdd").className = "d-none";
+                    document.getElementById("numberOfFloorAdd").className = "d-none";
+                    document.getElementById("poolAreaAdd").className = "d-none";
+                    document.getElementById("selectValue").value = 3;
+                    document.getElementById("addFreeService").className = "mb-3 row"
+                    break
+            }
+            break;
+        case "edit":
+            $(document).ready(
+                function () {
+                    $('#editmodal').appendTo('body').modal('show')
+                }
+            );
+            switch (value) {
+                case "1":
+                    document.getElementById("standardEditCheck").className = "mb-3 row";
+                    document.getElementById("descriptionEditCheck").className = "mb-3 row";
+                    document.getElementById("numberOfFloorEdit").className = "mb-3 row"
+                    document.getElementById("poolAreaEdit").className = "mb-3 row";
+                    document.getElementById("editFreeService").className = "d-none";
+                    document.getElementById("facilityTypeEdit").value = 1;
+                    break
+                case "2":
+                    document.getElementById("standardEditCheck").className = "mb-3 row";
+                    document.getElementById("descriptionEditCheck").className = "mb-3 row";
+                    document.getElementById("numberOfFloorEdit").className = "mb-3 row";
+                    document.getElementById("poolAreaEdit").className = "d-none";
+                    document.getElementById("editFreeService").className = "d-none";
+                    document.getElementById("facilityTypeEdit").value = 2;
+                    break
+                case "3":
+                    document.getElementById("standardEditCheck").className = "d-none";
+                    document.getElementById("descriptionEditCheck").className = "d-none";
+                    document.getElementById("editFreeService").className = "mb-3 row";
+                    document.getElementById("numberOfFloorEdit").className = "d-none";
+                    document.getElementById("poolAreaEdit").className = "d-none";
+                    document.getElementById("facilityTypeEdit").value = 3;
+                    break
+            }
+            break;
+    }
+
+    function newUpdate() {
+        let value = document.getElementById("facilityTypeEdit").value;
+        switch (value) {
+            case "1":
+                document.getElementById("standardEditCheck").className = "mb-3 row";
+                document.getElementById("descriptionEditCheck").className = "mb-3 row";
+                document.getElementById("numberOfFloorEdit").className = "mb-3 row"
+                document.getElementById("poolAreaEdit").className = "mb-3 row";
+                document.getElementById("editFreeService").className = "d-none";
+                document.getElementById("facilityTypeEdit").value = 1;
+                break
+            case "2":
+                document.getElementById("standardEditCheck").className = "mb-3 row";
+                document.getElementById("descriptionEditCheck").className = "mb-3 row";
+                document.getElementById("numberOfFloorEdit").className = "mb-3 row";
+                document.getElementById("poolAreaEdit").className = "d-none";
+                document.getElementById("editFreeService").className = "d-none";
+                document.getElementById("facilityTypeEdit").value = 2;
+                break
+            case "3":
+                document.getElementById("standardEditCheck").className = "d-none";
+                document.getElementById("descriptionEditCheck").className = "d-none";
+                document.getElementById("editFreeService").className = "mb-3 row";
+                document.getElementById("numberOfFloorEdit").className = "d-none";
+                document.getElementById("poolAreaEdit").className = "d-none";
+                document.getElementById("facilityTypeEdit").value = 3;
+                break
+        }
+    }
+
+    function facility() {
+        let value = document.getElementById("selectValue").value;
+        switch (value) {
+            case "1":
+                document.getElementById("standardAdd").className = "mb-3 row";
+                document.getElementById("descriptionAdd").className = "mb-3 row";
+                document.getElementById("addFreeService").className = "d-none"
+                document.getElementById("numberOfFloorAdd").className = "mb-3 row"
+                document.getElementById("poolAreaAdd").className = "mb-3 row";
+                document.getElementById("selectValue").value = 1;
+                break
+            case "2":
+                document.getElementById("standardAdd").className = "mb-3 row";
+                document.getElementById("descriptionAdd").className = "mb-3 row";
+                document.getElementById("addFreeService").className = "d-none"
+                document.getElementById("numberOfFloorAdd").className = "mb-3 row";
+                document.getElementById("poolAreaAdd").className = "d-none";
+                document.getElementById("selectValue").value = 2;
+                break
+            case "3":
+                document.getElementById("standardAdd").className = "d-none";
+                document.getElementById("descriptionAdd").className = "d-none";
+                document.getElementById("numberOfFloorAdd").className = "d-none";
+                document.getElementById("poolAreaAdd").className = "d-none";
+                document.getElementById("selectValue").value = 3;
+                document.getElementById("addFreeService").className = "mb-3 row"
+                break
+        }
+    }
+
+    let isEmpty = document.getElementById("isEmpty").value;
+    if (isEmpty == "true") {
+        document.getElementById("checkTable").style.display = "none";
+        document.getElementById('resultFind').style.display = "block";
+    } else {
+        document.getElementById("checkTable").style.display = "block";
+        document.getElementById('resultFind').style.display = "none";
+    }
+    let hasPre = document.getElementById("hasPre").value;
+    let hasNex = document.getElementById("hasNex").value;
+    let name = document.getElementById("nameSearh").value;
+    let type = document.getElementById("typeSearh").value;
+
+    if (hasNex == "true") {
+        let nextPage = document.getElementById("nex").value;
+        let nextLink = "/facility/find?name=" + name + "&type=" + type + "&page=" + nextPage;
+        document.getElementById("nexButton").href = nextLink;
+    } else {
+        document.getElementById("nexButton").style.pointerEvents = "none";
+        document.getElementById("nexButton").className = "btn btn-outline-light";
+    }
+    if (hasPre == "true") {
+        let prePage = document.getElementById("pre").value;
+        let preLink = "/facility/find?name=" + name + "&type=" + type + "&page=" + prePage;
+        document.getElementById("preButton").href = preLink;
+    } else {
+        document.getElementById("preButton").style.pointerEvents = "none";
+        document.getElementById("preButton").className = "btn btn-outline-light";
+    }
+
+    function updateFacility(id, name, area, cost, maxPeople, rentType, facilityType, standard, description, poolArea, floor, free) {
+        document.getElementById("idEdit").value = id;
+        document.getElementById("nameEdit").value = name;
+        document.getElementById("areaEdit").value = area;
+        document.getElementById("costEdit").value = cost;
+        document.getElementById("maxPeopleEdit").value = maxPeople;
+        document.getElementById("rentTypeEdit").value = rentType;
+        document.getElementById("facilityTypeEdit").value = facilityType;
+        document.getElementById("standardEdit").value = standard;
+        document.getElementById("descriptionEdit").value = description;
+        document.getElementById("poolAreaEdit").value = poolArea;
+        document.getElementById("poolEdit").value = poolArea;
+        document.getElementById("numberFloorEdit").value = floor;
+        document.getElementById("facilityFreeEdit").value = free;
+        switch (facilityType) {
+            case "1":
+                document.getElementById("standardEditCheck").className = "mb-3 row";
+                document.getElementById("descriptionEditCheck").className = "mb-3 row";
+                document.getElementById("numberOfFloorEdit").className = "mb-3 row"
+                document.getElementById("poolAreaEdit").className = "mb-3 row";
+                document.getElementById("editFreeService").className = "d-none";
+                document.getElementById("facilityTypeEdit").value = 1;
+                break
+            case "2":
+                document.getElementById("standardEditCheck").className = "mb-3 row";
+                document.getElementById("descriptionEditCheck").className = "mb-3 row";
+                document.getElementById("numberOfFloorEdit").className = "mb-3 row";
+                document.getElementById("poolAreaEdit").className = "d-none";
+                document.getElementById("editFreeService").className = "d-none";
+                document.getElementById("facilityTypeEdit").value = 2;
+                break
+            case "3":
+                document.getElementById("standardEditCheck").className = "d-none";
+                document.getElementById("descriptionEditCheck").className = "d-none";
+                document.getElementById("editFreeService").className = "mb-3 row";
+                document.getElementById("numberOfFloorEdit").className = "d-none";
+                document.getElementById("poolAreaEdit").className = "d-none";
+                document.getElementById("facilityTypeEdit").value = 3;
+                break
+        }
+    }
+
+    function deleteModal(id, name) {
+        document.getElementById("nameDelete").innerText = name;
+        document.getElementById("idDelete").value = id;
+    }
+</script>
+</html>

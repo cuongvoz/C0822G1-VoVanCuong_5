@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{layout :: head(Home)}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{layout :: header}"></div>
+<div class="row">
+    <nav class="navbar navbar-light" style="background-color: teal">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="home.jsp">Home</a>
+            <a class="navbar-brand" href="/employee">Employee</a>
+            <a class="navbar-brand" th:href="@{/customer}">Customer</a>
+            <a class="navbar-brand" th:href="@{/facility}">Service</a>
+            <a class="navbar-brand" th:href="@{/contract}">Contract</a>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</div>
+<div class="row">
+    <img src=" https://cf.bstatic.com/xdata/images/hotel/max1024x768/62371531.jpg?k=fb1828d64f739b526944dcb487699e4625ad8799986e0e4ef5c2c930dcf39b6c&o=&hp=1">
+</div>
+<div th:replace="~{layout :: footer}"></div>
+</body>
+</html>
