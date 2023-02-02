@@ -17,7 +17,9 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-
+        .imgcard:hover {
+            cursor: pointer;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -54,7 +56,7 @@
     <nav class="navbar navbar-light" style="background-color: teal">
         <div class="container-fluid" style="position: relative">
             <a class="navbar-brand"
-               th:href="@{/}">Home</a>
+               href="http://localhost:63342/CaseStudy_html/home.html?_ijt=p3sccuen0leaefmt36s4tdo248">Home</a>
 
             <button class="btn btn-light" style="position: absolute;left: 100px" data-bs-toggle="modal"
                     data-bs-target="#addmodal">Thêm Dịch Vụ
@@ -76,56 +78,56 @@
 
    <div style="width: 100%;">
        <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
-           <img src="https://motortrip.vn/wp-content/uploads/2022/03/khach-san-17.jpg" class="card-img-top" alt="...">
+           <img src="https://motortrip.vn/wp-content/uploads/2022/03/khach-san-17.jpg" class="card-img-top imgcard imgbutton" alt="...">
            <div class="card-body" >
                <p class="card-text" style="font-weight: bold;font-size: 20px">Armani Hotel</p>
                <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
            </div>
        </div>
        <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
-           <img src="https://vcdn1-dulich.vnecdn.net/2022/07/29/hypat-1659069584-1659081355.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=ateHKAAnu32uybgAOx-emA" class="card-img-top" alt="...">
+               <img src="https://vcdn1-dulich.vnecdn.net/2022/07/29/hypat-1659069584-1659081355.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=ateHKAAnu32uybgAOx-emA" class="card-img-top imgcard imgbutton"  alt="..." >
            <div class="card-body">
                <p class="card-text" style="font-weight: bold;font-size: 20px">Boscolo Exedra</p>
                <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
            </div>
        </div>
        <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
-           <img src="https://pix10.agoda.net/hotelImages/2817185/-1/4406a970306a452300f94532410dab2c.jpg?ca=10&ce=1&s=1024x768" class="card-img-top" alt="...">
+           <img src="https://pix10.agoda.net/hotelImages/2817185/-1/4406a970306a452300f94532410dab2c.jpg?ca=10&ce=1&s=1024x768" class="card-img-top imgcard imgbutton" alt="...">
            <div class="card-body">
                <p class="card-text" style="font-weight: bold;font-size: 20px">OrchidHeaven</p>
                <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
            </div>
        </div>
        <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
-           <img src="https://hoanghaihotel.vn/Data/images/tintuc/10032021170917-gioi-thieu-ve-khach-san-hoang-hai.jpg" class="card-img-top" alt="...">
+           <img src="https://hoanghaihotel.vn/Data/images/tintuc/10032021170917-gioi-thieu-ve-khach-san-hoang-hai.jpg" class="card-img-top imgcard imgbutton" alt="...">
            <div class="card-body">
                <p class="card-text" style="font-weight: bold;font-size: 20px">Hotel Areias do Seixo</p>
                <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
            </div>
        </div> <br> <br>
        <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
-           <img src="https://hanoihotel.com.vn/wp-content/uploads/sites/97/2020/04/hanoi-hotel17942.jpg" class="card-img-top" alt="...">
+           <img src="https://hanoihotel.com.vn/wp-content/uploads/sites/97/2020/04/hanoi-hotel17942.jpg" class="card-img-top imgcard imgbutton" alt="...">
            <div class="card-body">
                <p class="card-text" style="font-weight: bold;font-size: 20px">Motel Magic</p>
                <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
            </div>
        </div>
        <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
-           <img src="https://i.ex-cdn.com/nhadautu.vn/files/content/2020/05/08/kinh-doanh-khach-san-1-2149.jpg" class="card-img-top" alt="...">
+           <img src="https://i.ex-cdn.com/nhadautu.vn/files/content/2020/05/08/kinh-doanh-khach-san-1-2149.jpg" class="card-img-top imgcard imgbutton" alt="...">
            <div class="card-body">
                <p class="card-text" style="font-weight: bold;font-size: 20px">Hotel Villa Honegg</p>
                <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
            </div>
        </div>
        <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
-           <img src="https://vcdn1-dulich.vnecdn.net/2021/05/14/stunning-sunset-at-the-1620959674-1620963331.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=RAP72v1BULO6wM4YrQx1sg" class="card-img-top" alt="...">
+           <img src="https://vcdn1-dulich.vnecdn.net/2021/05/14/stunning-sunset-at-the-1620959674-1620963331.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=RAP72v1BULO6wM4YrQx1sg" class="card-img-top imgcard imgbutton" alt="...">
            <div class="card-body">
                <p class="card-text" style="font-weight: bold;font-size: 20px">Lover’s Deep Luxury</p>
                <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
            </div>
        </div>
        <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
-           <img src="https://mixhotel.vn/uploads/images/62abe8ead6a5eb614f4bdc08/khach-san-tinh-yeu-trung-son__6_.webp" class="card-img-top" alt="...">
+           <img src="https://mixhotel.vn/uploads/images/62abe8ead6a5eb614f4bdc08/khach-san-tinh-yeu-trung-son__6_.webp" class="card-img-top imgcard imgbutton" alt="...">
            <div class="card-body">
                <p class="card-text" style="font-weight: bold;font-size: 20px">Trinity Energy</p>
                <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
@@ -451,6 +453,11 @@
     $(".clearError").click(function(){
         $(".clear").hide();
     });
+
+    $(".imgbutton").click(function(){
+        $("#addmodal").modal('show');
+    });
+
 
     let typeId = $('#typezCheck').val();
     let validate = $('#checkValidate').val();
