@@ -18,7 +18,9 @@
             background-size: cover;
         }
         .imgcard:hover {
+
             cursor: pointer;
+
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -144,7 +146,7 @@
             <br> <br>   <br> <br>
         </center>
     </div>
-
+</div>
 <div>
     <div style="background: cadetblue;margin-top: 80px" class="row">
         <div class="col-1" style="background: cadetblue"></div>
@@ -224,15 +226,15 @@
                 <button type="button"  class="btn-close clearError" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/facility/add}" method="post" th:object="${facility}">
+                <form method="post">
                     <input type="hidden" name="validate" value="add">
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">Loại Dịch Vụ</label>
                         <div class="col-sm-10">
-                            <select class="form-control" onchange="facility()" id="selectValue"
-                                    th:field="*{facilityType}">
-                                <option th:each="item : ${listType}" th:text="${item.name}"
-                                        th:value="${item.id}"></option>
+                            <select class="form-control" onchange="facility()" id="selectValue">
+                                <option class="form-control" value="1">Villa</option>
+                                <option class="form-control" value="2">House</option>
+                                <option class="form-control" value="3">Room</option>
                             </select>
                         </div>
                     </div>
@@ -267,9 +269,11 @@
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">Kiểu Thuê</label>
                         <div class="col-sm-10">
-                            <select class="form-control" th:field="*{rentType}">
-                                <option th:each="item : ${listRent}" th:text="${item.name}"
-                                        th:value="${item.id}"></option>
+                            <select class="form-control" >
+                               <option class="form-control" value="1">Year</option>
+                               <option class="form-control" value="2">Month</option>
+                               <option class="form-control" value="3">Day</option>
+                               <option class="form-control" value="4">Hour</option>
                             </select>
                         </div>
                     </div>
@@ -445,11 +449,10 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="checkValidate" th:value="${validate}">
-<input type="hidden" id="typezCheck" th:value="${typez}">
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
+
     $(".clearError").click(function(){
         $(".clear").hide();
     });

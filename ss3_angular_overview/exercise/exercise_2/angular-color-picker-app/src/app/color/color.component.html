@@ -1,0 +1,4 @@
+<p [ngStyle]="{color : newColor}">color works!</p>
+<p [ngStyle]="{color : newColor}">Đây là màu sắc {{newColor}}</p>
+<!--<input type="color" (change)="changeColor($event.target)" >-->
+<input type="color" [value]="newColor"  [(ngModel)]="newColor" >

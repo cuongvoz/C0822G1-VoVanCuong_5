@@ -1,0 +1,8 @@
+<p>calculator works!</p>
+<input type="number" #element1 placeholder="giá trị 1">
+<input type="number" #element2 placeholder="giá trị 2"> <br>
+<button class="btn btn-outline-info" (click)="calculator(element1.value,element2.value,'+')" >+</button> &nbsp;
+<button class="btn btn-outline-info" (click)="calculator(element1.value,element2.value,'-')">-</button> &nbsp;
+<button class="btn btn-outline-info" (click)="calculator(element1.value,element2.value,'x')">x</button> &nbsp;
+<button class="btn btn-outline-info" (click)="calculator(element1.value,element2.value,'/')">/</button> &nbsp;
+<p>{{result}}</p>
