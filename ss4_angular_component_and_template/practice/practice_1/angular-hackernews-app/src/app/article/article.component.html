@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<h2>Today's article</h2>
+<hr>
+<div>
+  <a href="{{article.url}}" target="_blank">{{article.title}}</a>
+</div>
+
+<div style="margin-left: 320px;width: 700px">
+  <h1 style="text-align: center">Article Information</h1>
+    <div class="input-group">
+      <span class="input-group-text" id="basic-addon1">Title</span>
+      <input type="text" class="form-control" [(ngModel)]="article.title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1" > <br>
+
+    </div>
+  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    <div class="input-group">
+      <span class="input-group-text" id="basic-addon2">URL</span>
+      <input type="text" class="form-control" [(ngModel)]="article.url" placeholder="URL" aria-label="Username" aria-describedby="basic-addon2" >
+    </div>
+    <button (click)="addNewArticle()" class="btn btn-primary " style="text-align: center;margin-top: 10px;margin-left: 300px">Add</button>
+</div>
+<hr>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Like</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let art of articles">
+   <th><a href="{{art.url}}" target="_blank">{{art.title}}</a></th>
+   <th><app-like></app-like></th>
+  </tr>
+  </tbody>
+</table>
+<app-footer></app-footer>
