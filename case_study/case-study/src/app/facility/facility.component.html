@@ -1,0 +1,322 @@
+<div class="row">
+  <nav class="navbar navbar-light" style="background-color: teal">
+    <div class="container-fluid" style="position: relative">
+      <a class="navbar-brand"
+         [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
+
+      <button class="btn btn-light" style="position: absolute;left: 100px" data-bs-toggle="modal"
+              data-bs-target="#addmodal">Thêm Dịch Vụ
+      </button>
+      <form th:action="@{/facility/find}" method="get" style="position:absolute ;top: 1px;right: 30px"
+            class="d-flex">
+        <input class="form-control me-2" type="search" name="name" placeholder="Tên Dịch Vụ"
+               aria-label="Search">
+        <input class="form-control me-2" type="search" name="type" placeholder="Loại Dịch Vụ"
+               aria-label="Searcase_studych">
+        <button class="btn btn-outline-light" type="submit">Tìm</button>
+      </form>
+    </div>
+  </nav>
+</div>
+<div class="bgimg" style="margin-bottom: -80px">
+  <br> <br> <br>
+  <div style="width: 100%;">
+    <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+      <img src="https://motortrip.vn/wp-content/uploads/2022/03/khach-san-17.jpg" class="card-img-top imgcard imgbutton" alt="...">
+      <div class="card-body" >
+        <p class="card-text" style="font-weight: bold;font-size: 20px">Armani Hotel</p>
+        <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+      <img src="https://vcdn1-dulich.vnecdn.net/2022/07/29/hypat-1659069584-1659081355.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=ateHKAAnu32uybgAOx-emA" class="card-img-top imgcard imgbutton"  alt="..." >
+      <div class="card-body">
+        <p class="card-text" style="font-weight: bold;font-size: 20px">Boscolo Exedra</p>
+        <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+      <img src="https://pix10.agoda.net/hotelImages/2817185/-1/4406a970306a452300f94532410dab2c.jpg?ca=10&ce=1&s=1024x768" class="card-img-top imgcard imgbutton" alt="...">
+      <div class="card-body">
+        <p class="card-text" style="font-weight: bold;font-size: 20px">OrchidHeaven</p>
+        <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+      <img src="https://hoanghaihotel.vn/Data/images/tintuc/10032021170917-gioi-thieu-ve-khach-san-hoang-hai.jpg" class="card-img-top imgcard imgbutton" alt="...">
+      <div class="card-body">
+        <p class="card-text" style="font-weight: bold;font-size: 20px">Hotel Areias do Seixo</p>
+        <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+      </div>
+    </div> <br> <br>
+    <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+      <img src="https://hanoihotel.com.vn/wp-content/uploads/sites/97/2020/04/hanoi-hotel17942.jpg" class="card-img-top imgcard imgbutton" alt="...">
+      <div class="card-body">
+        <p class="card-text" style="font-weight: bold;font-size: 20px">Motel Magic</p>
+        <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+      <img src="https://i.ex-cdn.com/nhadautu.vn/files/content/2020/05/08/kinh-doanh-khach-san-1-2149.jpg" class="card-img-top imgcard imgbutton" alt="...">
+      <div class="card-body">
+        <p class="card-text" style="font-weight: bold;font-size: 20px">Hotel Villa Honegg</p>
+        <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+      <img src="https://vcdn1-dulich.vnecdn.net/2021/05/14/stunning-sunset-at-the-1620959674-1620963331.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=RAP72v1BULO6wM4YrQx1sg" class="card-img-top imgcard imgbutton" alt="...">
+      <div class="card-body">
+        <p class="card-text" style="font-weight: bold;font-size: 20px">Lover’s Deep Luxury</p>
+        <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px">
+      <img src="https://mixhotel.vn/uploads/images/62abe8ead6a5eb614f4bdc08/khach-san-tinh-yeu-trung-son__6_.webp" class="card-img-top imgcard imgbutton" alt="...">
+      <div class="card-body">
+        <p class="card-text" style="font-weight: bold;font-size: 20px">Trinity Energy</p>
+        <p class="card-text"  style="font-weight: lighter;margin-top: -15px;width: 100%">Room size: 85.2 m<sup>2</sup>  <a href="" style="position: absolute;right: 15px;text-decoration: none;color: darkgreen"><i class="fa-sharp fa-solid fa-paper-plane"></i> Know more</a></p>
+
+      </div>
+    </div> <br> <br>
+  </div>
+  <br> <br>
+  <div class="d-flex justify-content-center">
+    <a class="btn btn-outline-light" style="margin: 4px">Previous</a>
+    <span class="btn btn-outline-light" style="margin: 4px">1</span>
+    <a class="btn btn-outline-light" style="margin: 4px">Next</a>
+
+  </div>
+  <br> <br>
+</div>
+<app-footer></app-footer>
+<div class="modal " tabindex="-1" id="addmodal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm mới dịch vụ <i class="fa-sharp fa-solid fa-user"></i></h5>
+        <button type="button"  class="btn-close clearError" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <input type="hidden" name="validate" value="add">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Loại Dịch Vụ</label>
+            <div class="col-sm-10">
+              <select class="form-control" onchange="facility()" id="selectValue">
+                <option class="form-control" value="1">Villa</option>
+                <option class="form-control" value="2">House</option>
+                <option class="form-control" value="3">Room</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tên Dịch Vụ</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" th:field="*{name}">
+              <p th:errors="*{name}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Diện Tích</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" th:field="*{area}">
+              <p th:errors="*{area}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Chi Phí Thuê</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" th:field="*{cost}">
+              <p th:errors="*{cost}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Số Người Tối Đa</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" th:field="*{maxPeople}">
+              <p th:errors="*{maxPeople}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Kiểu Thuê</label>
+            <div class="col-sm-10">
+              <select class="form-control" >
+                <option class="form-control" value="1">Year</option>
+                <option class="form-control" value="2">Month</option>
+                <option class="form-control" value="3">Day</option>
+                <option class="form-control" value="4">Hour</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3 row" id="standardAdd">
+            <label class="col-sm-2 col-form-label">Tiêu Chuẩn Phòng</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" th:field="*{standardRoom}">
+              <p th:errors="*{standardRoom}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row" id="descriptionAdd">
+            <label class="col-sm-2 col-form-label">Mô Tả Khác</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" th:field="*{descriptionOtherConvenience}">
+              <p th:errors="*{descriptionOtherConvenience}" class="text-danger clear"
+                 style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row" id="poolAreaAdd">
+            <label class="col-sm-2 col-form-label">Diện Tích Hồ Bơi</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" th:field="*{poolArea}">
+              <p th:errors="*{poolArea}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row" id="numberOfFloorAdd">
+            <label class="col-sm-2 col-form-label">Số Tầng</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" th:field="*{numberOfFloor}">
+              <p th:errors="*{numberOfFloor}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row d-none" id="addFreeService">
+            <label class="col-sm-2 col-form-label">Dịch Vụ Miễn Phí</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" th:field="*{facilityFree}">
+              <p th:errors="*{facilityFree}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button"  class="btn btn-secondary clearError" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit"  class="btn btn-primary">Xác Nhận</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" id="deletemodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác Nhận Xóa</h5>
+        <button type="button" class="btn-close clearError" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form th:action="@{/facility/delete}" method="post">
+        <div class="modal-body">
+          <p>B?n có chắn chắn muốn xóa dịch vụ <b><span id="nameDelete"></span> </b> ?</p>
+        </div>
+        <input type="hidden" name="id" id="idDelete">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary clearError" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" class="btn btn-primary">Xóa</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" id="editmodal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sửa thông tin dịch vụ <i class="fa-sharp fa-solid fa-user"></i></h5>
+        <button type="button"  class="btn-close clearError" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/facility/add}" method="post" th:object="${facility}">
+          <input type="hidden" name="validate" value="edit">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tên Dịch Vụ</label>
+            <div class="col-sm-10">
+              <input type="hidden" class="form-control" id="idEdit" th:field="*{id}">
+              <input type="text" class="form-control" id="nameEdit" th:field="*{name}">
+              <p th:errors="*{name}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Diện Tích</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="areaEdit" th:field="*{area}">
+              <p th:errors="*{area}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Chi Phí Thuê</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="costEdit" th:field="*{cost}">
+              <p th:errors="*{cost}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Số Người Tối Đa</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="maxPeopleEdit" th:field="*{maxPeople}">
+              <p th:errors="*{maxPeople}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Kiểu Thuê</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="rentTypeEdit" th:field="*{rentType}">
+                <option th:each="item : ${listRent}" th:text="${item.name}"
+                        th:value="${item.id}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Loại Dịch Vụ</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="facilityTypeEdit" onchange="newUpdate()"
+                      th:field="*{facilityType}">
+                <option th:each="item : ${listType}" th:text="${item.name}"
+                        th:value="${item.id}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row" id="standardEditCheck">
+            <label class="col-sm-2 col-form-label">Tiêu Chuẩn Phòng</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="standardEdit" th:field="*{standardRoom}">
+              <p th:errors="*{standardRoom}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row" id="descriptionEditCheck">
+            <label class="col-sm-2 col-form-label">Mô Tả Khác</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="descriptionEdit"
+                     th:field="*{descriptionOtherConvenience}">
+              <p th:errors="*{descriptionOtherConvenience}" class="text-danger clear"
+                 style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row" id="poolAreaEdit">
+            <label class="col-sm-2 col-form-label">Diện Tích Hồ Bơi</label>
+            <div class="col-sm-10">
+              <input type="number" id="poolEdit" class="form-control" th:field="*{poolArea}">
+              <p th:errors="*{poolArea}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row" id="numberOfFloorEdit">
+            <label class="col-sm-2 col-form-label">Số Tầng</label>
+            <div class="col-sm-10">
+              <input type="number" id="numberFloorEdit" class="form-control"
+                     th:field="*{numberOfFloor}">
+              <p th:errors="*{numberOfFloor}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="mb-3 row d-none" id="editFreeService">
+            <label class="col-sm-2 col-form-label">Dịch Vụ Miễn Phí</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="facilityFreeEdit" th:field="*{facilityFree}">
+              <p th:errors="*{facilityFree}" class="text-danger clear" style="font-weight: bold"></p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button"  class="btn btn-secondary clearError" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" class="btn btn-primary">Xác Nhận</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,345 @@
+<div class="row">
+  <nav class="navbar navbar-light" style="background-color: teal">
+    <div class="container-fluid" style="position: relative">
+      <a class="navbar-brand"
+         [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
+
+      <button class="btn btn-light" style="position: absolute;left: 100px" data-bs-toggle="modal"
+              data-bs-target="#addmodal">Tạo Hợp Đồng
+      </button>
+      <form action="/contract/find" method="get" style="position:absolute ;top: 1px;right: 30px"
+            class="d-flex">
+        <input class="form-control me-2" type="search" name="facility" placeholder="Dịch Vụ"
+               aria-label="Search">
+        <input class="form-control me-2" type="search" name="customer" placeholder="Khách Hàng"
+               aria-label="Search">
+        <input class="form-control me-2" type="search" name="employee" placeholder="Nhân Viên"
+               aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Tìm</button>
+      </form>
+    </div>
+  </nav>
+</div>
+<div class="bgimg" style="margin-bottom: -80px">
+  <br> <br> <br>
+  <table class="table" style="backdrop-filter: blur(10px);color: aliceblue;font-weight: bold">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Dịch Vụ</th>
+      <th>Nhân Viên</th>
+      <th>Khách Hàng</th>
+      <th>Ngày Bắt Đầu</th>
+      <th>Ngày Kết Thúc</th>
+      <th>Tiền Đặt Cọc</th>
+      <th>Tổng Tiền</th>
+      <th>Các Dịch Vụ Đi Kèm</th>
+    </tr>
+    </thead>
+    <tbody id="my-body">
+    <tr>
+      <th>1</th>
+      <th>Villa Beach Front</th>
+      <th>Nguyễn Văn An</th>
+      <th>Nguyễn Thị Hào</th>
+      <th>2020-12-08</th>
+      <th>2020-12-08</th>
+      <th>0đ</th>
+      <th>9000000đ</th>
+      <th>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
+                onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
+        </button>
+      </th>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>House Princess 01</th>
+      <th>Lê Văn Bình</th>
+      <th>Phạm Xuân Diệu</th>
+      <th>2020-07-14</th>
+      <th>2020-07-21</th>
+      <th>200000đ</th>
+      <th>15000000đ</th>
+      <th>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
+                onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
+        </button>
+      </th>
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>Room Twin 01</th>
+      <th>Hồ Thị Yến</th>
+      <th>Trương Đình Nghệ</th>
+      <th>2021-03-15</th>
+      <th>2021-03-17</th>
+      <th>50000đ</th>
+      <th>13000000đ</th>
+      <th>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
+                onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
+        </button>
+      </th>
+    </tr>
+    <tr>
+      <th>4</th>
+      <th>Villa No Beach Front</th>
+      <th>Võ Công Toản</th>
+      <th>Dương Văn Quan</th>
+      <th>2021-01-14</th>
+      <th>2021-01-18</th>
+      <th>100000đ</th>
+      <th>100000000đ</th>
+      <th>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
+                onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
+        </button>
+      </th>
+    </tr>
+    <tr>
+      <th>5</th>
+      <th>House Princess 02</th>
+      <th>Nguyễn Bỉnh Phát</th>
+      <th>Hoàng Trần Nhi Nhi</th>
+      <th>2021-07-14</th>
+      <th>2021-07-15</th>
+      <th>0đ</th>
+      <th>9000000đ</th>
+      <th>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
+                onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
+        </button>
+      </th>
+    </tr>
+    </tbody>
+  </table>
+  <div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <a class="btn btn-outline-light" style="margin: 4px" id="pre">Previous</a>
+    <button id="pagez" class="btn btn-outline-light" style="margin: 4px">1</button>
+    <a class="btn btn-outline-light" id="nex" style="margin: 4px">Next</a>
+  </div>
+ <br> <br> <br>
+</div>
+<div class="modal" tabindex="-1" id="addDetail">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm dịch vụ đi kèm <i class="fa-sharp fa-solid fa-user"></i></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/contract/add}" method="post" th:object="${contractDetail}">
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Dịch Vụ</label>
+            <div class="col-sm-10">
+              <select th:field="*{attachFacility}" id="attachFacilityAdd" class="form-control">
+                <option th:each="facility : ${listAttach}" th:text="${facility.name}"
+                        th:value="${facility.id}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Số Lượng</label>
+            <input type="hidden" th:field="*{contract}" id="contractIdAdd">
+            <div class="col-sm-10">
+              <input type="number" id="quantityAdd" class="form-control" th:field="*{quantity}">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="button" onclick="addContractDetail()" class="btn btn-primary">Thêm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" id="viewAttachFacility">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Dịch Vụ Đi Kèm Của Hợp Đồng Này</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <input type="hidden" th:value="${modal}" id="modalCheck">
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Dịch Vụ</th>
+            <th>Đơn Giá</th>
+            <th>Xuất</th>
+            <th>Trạng Thái</th>
+            <th>Số Lượng</th>
+            <th>Tổng Tiền</th>
+          </tr>
+          </thead>
+          <tbody id="tableAttachFacilityNew">
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Thoát</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" id="addmodal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Tạo Hợp Đồng <i class="fa-sharp fa-solid fa-user"></i></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/contract/addContract}" method="post" th:object="${contract}">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ngày Bắt Đầu</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="addStartDate" th:field="*{startDate}">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ngày Kết Thúc</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="addEndDate" th:field="*{endDate}">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tiền Gửi</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" onchange="validate()" id="addDeposit" th:field="*{deposit}">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tổng Tiền</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" readonly id="tongTien">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Khách Hàng</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="addCutomer" th:field="*{customer}">
+                <option th:each="customer : ${customerList}" th:text="${customer.name}"
+                        th:value="${customer.id}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Nhân Viên</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="addEmployee" th:field="*{employee}">
+                <option th:each="employee : ${employeeList}" th:text="${employee.name}"
+                        th:value="${employee.id}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Dịch Vụ</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="addFacility" th:field="*{facility}">
+                <option th:each="facility : ${facilityList}" th:text="${facility.name}"
+                        th:value="${facility.id}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="button" onclick="addContract()" class="btn btn-primary">Xác Nhận</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" id="editModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thay Đổi Hợp Đồng <i class="fa-sharp fa-solid fa-user"></i></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/contract/addContract}" method="post" th:object="${contract}">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ngày Bắt Đầu</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="startNewDate" th:field="*{startDate}">
+              <input type="hidden" class="form-control" id="idEdit" th:field="*{id}">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ngày Kết Thúc</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="endNewEdit" th:field="*{endDate}">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tiền Gửi</label>
+            <div class="col-sm-10">
+              <input type="number" id="depositEdit" class="form-control" th:field="*{deposit}">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tổng Tiền</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" readonly id="tongTienEdit">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Khách Hàng</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="customerEdit" th:field="*{customer}">
+                <option th:each="customer : ${customerList}" th:text="${customer.name}"
+                        th:value="${customer.id}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Nhân Viên</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="employeeEdit" th:field="*{employee}">
+                <option th:each="employee : ${employeeList}" th:text="${employee.name}"
+                        th:value="${employee.id}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Dịch Vụ</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="facilityEdit" th:field="*{facility}">
+                <option th:each="facility : ${facilityList}" th:text="${facility.name}"
+                        th:value="${facility.id}"></option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Dịch Vụ Đi Kèm</label>
+            <div class="col-sm-10">
+              <button type="button" class="btn btn-primary" onclick="addAttach()" data-bs-toggle="modal"
+                      data-bs-target="#addDetail">+
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="button" onclick="updateContract2()" class="btn btn-primary">Xác Nhận</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

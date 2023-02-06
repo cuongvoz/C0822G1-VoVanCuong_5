@@ -1,0 +1,6 @@
+<h1>Rating bar</h1>
+<p>{{valuez}}</p>
+<div>
+  <span *ngFor="let ratez of rating" [ngStyle]="{backgroundColor : ratez.background}" style="padding: 10px;margin-left: 5px;cursor: pointer" (click)="rate(ratez.value)">{{ratez.value}}</span>
+
+</div>
