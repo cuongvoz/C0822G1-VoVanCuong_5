@@ -1,6 +1,11 @@
-<h1>Rating bar</h1>
-<p>{{valuez}}</p>
-<div>
-  <span *ngFor="let ratez of rating" [ngStyle]="{backgroundColor : ratez.background}" style="padding: 10px;margin-left: 5px;cursor: pointer" (click)="rate(ratez.value)">{{ratez.value}}</span>
-
+<h1>Rating Bar</h1>
+<p>{{value}}</p>
+<div *ngFor="let rating of ratings" style="display: inline">
+  <span *ngIf="rating.active == true;then pink else grey"></span>
+<ng-template #pink>
+  <div (click)="rate(rating.value)" style="display: inline-block;background: pink;padding: 15px;margin-left: 5px;cursor: pointer;width: 15px">{{rating.value}}</div>
+</ng-template>
+<ng-template #grey>
+  <div  (click)="rate(rating.value)" style="display: inline-block;background: darkgrey;padding: 15px;margin-left: 5px;cursor: pointer;width: 15px">{{rating.value}}</div>
+</ng-template>
 </div>

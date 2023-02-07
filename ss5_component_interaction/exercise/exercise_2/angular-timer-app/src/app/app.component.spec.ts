@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-countdown-timer-app'`, () => {
+  it(`should have as title 'angular-timer-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-countdown-timer-app');
+    expect(app.title).toEqual('angular-timer-app');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('angular-countdown-timer-app app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('angular-timer-app app is running!');
   });
 });

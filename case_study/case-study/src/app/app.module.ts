@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CustomerComponent } from './customer/customer.component';
 import { FacilityComponent } from './facility/facility.component';
 import { ContractComponent } from './contract/contract.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,10 +21,11 @@ import { ContractComponent } from './contract/contract.component';
     FacilityComponent,
     ContractComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

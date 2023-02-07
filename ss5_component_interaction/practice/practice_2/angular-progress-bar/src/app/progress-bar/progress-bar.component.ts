@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ProgressBarComponent implements OnInit {
   @Input() backgroundColor = '#D9D9D9';
-  @Input() progressColor = 'red';
+  @Input() progressColor = '#4CAF50';
   @Input() progress = 0;
   constructor() { }
 
@@ -16,12 +16,19 @@ export class ProgressBarComponent implements OnInit {
   }
   loading() {
     let interval = setInterval(() => {
-      this.progress = +this.progress + 5;
-      // tslint:disable-next-line:triple-equals
+      this.progress = this.progress + 5;
       if (this.progress >= 20) {
-        clearInterval(interval);
+        // clearInterval(interval);
+        setInterval( () => this.okay(),1000)
+
       }
     }, 1000);
+  }
+  okay():void {
+    this.progress = this.progress - 5;
+    if (this.progress <= 0) {
+      this.loading();
     }
-
+  }
 }
+

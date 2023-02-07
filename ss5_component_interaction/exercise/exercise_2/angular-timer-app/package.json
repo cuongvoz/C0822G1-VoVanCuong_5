@@ -1,5 +1,5 @@
 {
-  "name": "angular-countdown-timer-app",
+  "name": "angular-timer-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

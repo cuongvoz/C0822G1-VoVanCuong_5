@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IRatingUnit} from '../irating-unit';
+import {IRatingUnit} from '../i-rating-unit';
 
 @Component({
   selector: 'app-rating-bar',
@@ -7,65 +7,62 @@ import {IRatingUnit} from '../irating-unit';
   styleUrls: ['./rating-bar.component.css']
 })
 export class RatingBarComponent implements OnInit {
-   backgroundColor = 'gray';
-   newBackgroundColor = 'pink';
-   valuez = 0;
-  rating: any[] = [
+  @Input() value: number;
+  ratings: IRatingUnit[] = [
     {
-     value: 1,
-      background: this.backgroundColor
+      value: 1,
+      active: false
     },
     {
       value: 2,
-      background: this.backgroundColor
+      active: false
     },
     {
       value: 3,
-      background: this.backgroundColor
+      active: false
     },
     {
       value: 4,
-      background: this.backgroundColor
-    }
-    ,
+      active: false
+    },
     {
       value: 5,
-      background: this.backgroundColor
+      active: false
     },
     {
       value: 6,
-      background: this.backgroundColor
+      active: false
     },
     {
       value: 7,
-      background: this.backgroundColor
+      active: false
     },
     {
       value: 8,
-      background: this.backgroundColor
+      active: false
     },
     {
       value: 9,
-      background: this.backgroundColor
+      active: false
     },
     {
       value: 10,
-      background: this.backgroundColor
+      active: false
     }
   ];
   constructor() { }
 
   ngOnInit(): void {
   }
-  rate(target: any) {
-   this.valuez = target;
+
+  rate(value: number): void {
+    this.value = value;
     // tslint:disable-next-line:prefer-for-of
-   for (let i = 0; i < this.rating.length; i++) {
-      if (this.rating[i].value <= target) {
-        // tslint:disable-next-line:no-unused-expression
-        this.rating[i].background = 'pink';
+    for (let i = 0; i < this.ratings.length; i++) {
+      if (this.ratings[i].value <= value) {
+        this.ratings[i].active = true;
       } else {
-        this.rating[i].background = 'gray';
+        this.ratings[i].active = false;
       }
     }
   }

@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('angular-countdown-timer-app app is running!');
+    expect(page.getTitleText()).toEqual('angular-timer-app app is running!');
   });
 
   afterEach(async () => {
