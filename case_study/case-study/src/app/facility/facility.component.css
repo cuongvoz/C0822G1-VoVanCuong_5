@@ -1,0 +1,5 @@
+.hover:hover {
+  position: relative;
+  bottom: 20px;
+  box-shadow: gray 10px 10px 10px;
+}

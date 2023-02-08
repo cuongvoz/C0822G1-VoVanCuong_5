@@ -1,0 +1,77 @@
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <table>
+    <tr>
+      <th>Email</th>
+      <td><input type="text" formControlName="email" name="email"> <br>
+        <span style="color: red" *ngIf="registerForm.controls.email.hasError('required') && registerForm.controls.email.touched">Vui lòng nhập email</span>
+        <span style="color: red" *ngIf="registerForm.controls.email.hasError('email') && registerForm.controls.email.touched">Email bạn nhập không đúng định dạng</span>
+      </td>
+    </tr>
+    <tr >
+      <th>Password</th>
+      <td><input type="password" formControlName="password" name="password" #password> <br>
+        <span style="color: red" *ngIf="registerForm.controls.password.hasError('minlength') && registerForm.controls.password.touched">Mật khẩu không được dưới 6 kí tự</span>
+        <span style="color: red"
+              *ngIf="registerForm.controls.password.hasError('required') && registerForm.controls.password.dirty">Vui lòng nhập password</span>
+      </td>
+
+    </tr>
+    <tr *ngIf="password != '' && registerForm.controls.password.valid && registerForm.controls.password.dirty">
+      <th>Confirm Password</th>
+      <td><input type="password" #confirmPassword formControlName="confirmPassword" name="confirmPassword"> <br>
+        <span style="color: red"
+              *ngIf="password.value != confirmPassword.value && registerForm.controls.confirmPassword.dirty" >Password không giống như ở trên</span>
+      </td>
+
+    </tr>
+    <tr>
+      <th>Country</th>
+      <td>
+        <select formControlName="country" name="country">
+          <option value="" disabled selected>Quốc gia</option>
+          <option *ngFor="let xxx of countryList; index as i" [value]="xxx">{{xxx}}</option>
+
+        </select> <br>
+        <span style="color: red" *ngIf="registerForm.controls.country.hasError('required') && registerForm.controls.country.touched">Vui lòng chọn quốc gia</span>
+
+      </td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td><input type="text" formControlName="age" name="age"> <br>
+        <span style="color: red" *ngIf="registerForm.controls.age.hasError('required') && registerForm.controls.age.touched ">Vui lòng nhập Tuổi</span>
+        <span style="color: red" *ngIf="registerForm.controls.age.hasError('min') && registerForm.controls.age.touched" >Tuổi không được nhỏ hơn 18</span>
+      </td>
+    </tr>
+    <tr>
+      <th>Gender</th>
+      <td>
+        <input type="radio" formControlName="gender" checked="checked" name="gender" value="nam"> Nam
+        <input type="radio" formControlName="gender" name="gender" value="nữ"> Nữ
+      </td>
+    </tr>
+    <tr>
+      <th>Phone</th>
+      <td><input type="text" formControlName="phone" name="phone"> <br>
+        <span style="color: red"
+              *ngIf="registerForm.controls.phone.hasError('required') && registerForm.controls.phone.touched">Vui lòng nhập số điện thoại</span>
+        <span style="color: red" *ngIf="registerForm.controls.phone.hasError('pattern') && registerForm.controls.phone.touched">Số điện thoại không đúng định dạng</span>
+      </td>
+
+    </tr>
+  </table>
+  <button type="submit">Submit</button><br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</form>
+

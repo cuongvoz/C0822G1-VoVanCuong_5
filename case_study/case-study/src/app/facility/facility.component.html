@@ -22,7 +22,7 @@
   <br> <br> <br>
 
   <div style="width: 100%;">
-    <div class="card" style="width: 18rem;display: inline-block;margin-left: 30px;margin-top: 20px" *ngFor="let item of facilityList">
+    <div class="card hover" style="width: 18rem;display: inline-block;margin-left: 30px;margin-top: 20px" *ngFor="let item of facilityList">
       <img [src]="item.image" class="card-img-top imgcard imgbutton" alt="..." style="cursor: pointer" data-bs-toggle="modal"
            data-bs-target="#editmodal2" (click)="update(item)">
       <div class="card-body">
