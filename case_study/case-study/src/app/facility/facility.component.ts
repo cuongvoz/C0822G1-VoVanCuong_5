@@ -7,7 +7,9 @@ import {Facility} from "../model/facility";
   styleUrls: ['./facility.component.css']
 })
 export class FacilityComponent implements OnInit {
-   facility: Facility = {
+    idD: number = 0;
+    nameD: string = '';
+  facility: Facility = {
      id :0,
      name: '',
      roomSize: 0,
@@ -85,6 +87,8 @@ export class FacilityComponent implements OnInit {
 
   update(target: Facility) {
    this.facility = target;
+   this.idD = target.id;
+   this.nameD = target.name;
   }
   edit(idz: string, namez: string, roomSizez: string, imagez: string) {
     let facility = {
@@ -96,6 +100,14 @@ export class FacilityComponent implements OnInit {
     for (let i = 0; i < this.facilityList.length; i++) {
       if (this.facilityList[i].id == parseInt(idz)) {
         this.facilityList.splice(i,1,facility)
+      }
+    }
+  }
+
+  deleteById(idD: number) {
+    for (let i = 0; i < this.facilityList.length; i++) {
+      if (this.facilityList[i].id == idD) {
+        this.facilityList.splice(i,1)
       }
     }
   }

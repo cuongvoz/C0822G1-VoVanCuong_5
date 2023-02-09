@@ -1,0 +1,25 @@
+<form [formGroup]="productForm" (ngSubmit)="submit()">
+  <table>
+    <tr>
+      <td>Sửa sản phẩm:</td>
+      <td><input type="number"  formControlName="id"></td>
+    </tr>
+    <tr>
+      <td>Sửa Tên sản phẩm:</td>
+      <td><input type="text"  formControlName="name"></td>
+    </tr>
+    <tr>
+      <td>Sửa Giá sản phẩm</td>
+      <td><input type="number"  formControlName="price"></td>
+    </tr>
+    <tr>
+      <td>Sửa Mô tả về sản phẩm</td>
+      <td><input type="text"  formControlName="description"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button type="submit" >Sửa</button></td>
+    </tr>
+  </table>
+</form>
+

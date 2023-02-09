@@ -108,10 +108,19 @@
               <input type="text" class="form-control" [value]="facility.image" #editImage >
             </div>
           </div>
+          <div class="mb-3 row" >
+            <label class="col-sm-2 col-form-label">Xóa</label>
+            <div class="col-sm-10">
+             <button class="btn btn-outline-danger hover"  data-bs-toggle="modal"
+                     data-bs-target="#deletemodal"><i class="fa-sharp fa-solid fa-cube"></i></button>
+            </div>
+          </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary clearError" data-bs-dismiss="modal">Hủy</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="edit(editId.value,editName.value,editRoomSize.value,editImage.value)">Xác Nhận</button>
           </div>
+
         </form>
       </div>
     </div>
@@ -231,12 +240,12 @@
       </div>
       <form th:action="@{/facility/delete}" method="post">
         <div class="modal-body">
-          <p>B?n có chắn chắn muốn xóa dịch vụ <b><span id="nameDelete"></span> </b> ?</p>
+          <p>Bạn có chắn chắn muốn xóa dịch vụ <b><span>{{nameD}}</span> </b> ?</p>
         </div>
         <input type="hidden" name="id" id="idDelete">
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary clearError" data-bs-dismiss="modal">Hủy</button>
-          <button type="submit" class="btn btn-primary">Xóa</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteById(idD)">Xóa</button>
         </div>
       </form>
 
