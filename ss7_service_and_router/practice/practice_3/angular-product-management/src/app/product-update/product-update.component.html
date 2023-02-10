@@ -1,25 +1,23 @@
+<h2 style="width: 100%;text-align: center;margin: 20px">Sửa thông tin sản phẩm</h2>
 <form [formGroup]="productForm" (ngSubmit)="submit()">
-  <table>
-    <tr>
-      <td>Sửa sản phẩm:</td>
-      <td><input type="number"  formControlName="id"></td>
-    </tr>
-    <tr>
-      <td>Sửa Tên sản phẩm:</td>
-      <td><input type="text"  formControlName="name"></td>
-    </tr>
-    <tr>
-      <td>Sửa Giá sản phẩm</td>
-      <td><input type="number"  formControlName="price"></td>
-    </tr>
-    <tr>
-      <td>Sửa Mô tả về sản phẩm</td>
-      <td><input type="text"  formControlName="description"></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><button type="submit" >Sửa</button></td>
-    </tr>
-  </table>
-</form>
+<div class="container">
 
+  <div class="brand-logo"></div>
+  <div class="brand-title">TWITTER</div>
+  <div class="inputs">
+   <input type="hidden"  formControlName="id">
+    <label>Tên Sản Phẩm:</label>
+    <input type="text" formControlName="name"  placeholder="Vd: chú Cường Vê tút" />
+    <label>Đơn Giá</label>
+    <input type="text" formControlName="price" placeholder="Min 6 charaters long" />
+    <label>Mô tả</label>
+    <input type="text" formControlName="description" placeholder="Mô tả cho sản phẩm" />
+    <label>Danh Mục</label>
+    <select  formControlName="category" [compareWith]="compareFn">
+      <option *ngFor="let x of categoryList" [ngValue]="x">{{x.name}}</option>
+    </select>
+    <button type="submit">Xác Nhận</button>
+  </div>
+  <a href="https://twitter.com/prathkum" type="submit">MADE BY PRATHAM</a>
+</div>
+</form>

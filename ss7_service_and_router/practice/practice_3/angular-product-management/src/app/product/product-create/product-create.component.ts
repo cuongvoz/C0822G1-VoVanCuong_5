@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ProductService} from '../../service/product.service';
+import {CategoryService} from '../../service/category.service';
+import {Category} from '../../model/category';
 
 @Component({
   selector: 'app-product-create',
@@ -14,13 +16,19 @@ export class ProductCreateComponent implements OnInit {
     price: new FormControl(),
     description: new FormControl(),
   });
-  constructor(private productService: ProductService) { }
+
+  constructor(private productService: ProductService) {
+  }
 
   ngOnInit(): void {
   }
   submit() {
     const product = this.productForm.value;
-    this.productService.saveProduct(product);
+    const temp = this.productService.saveProduct(this.productForm.value).subscribe( next => {
+      alert('thêm mới thành công');
+    }, error => {
+      alert('thêm mới ko thành công');
+    });
     this.productForm.reset();
   }
 }

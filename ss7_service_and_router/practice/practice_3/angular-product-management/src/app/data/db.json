@@ -1,0 +1,82 @@
+{
+  "product": [
+    {
+      "id": 2,
+      "name": "IPhone 11",
+      "price": 1560000,
+      "description": "Like new",
+      "category": {
+        "id": 3,
+        "name": "Sony"
+      }
+    },
+    {
+      "id": 3,
+      "name": "IPhone X",
+      "price": 968000,
+      "description": "97%",
+      "category": {
+        "name": "cxzcxz",
+        "id": 4
+      }
+    },
+    {
+      "id": 4,
+      "name": "IPhone 8ccc",
+      "price": 7540000,
+      "description": "98%",
+      "category": {
+        "id": 1,
+        "name": "Iphone"
+      }
+    },
+    {
+      "id": 5,
+      "name": "cxzczx",
+      "price": "cxzczx",
+      "description": "czxczx",
+      "category": {
+        "id": 2,
+        "name": "Sony"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Cường",
+      "price": "321321",
+      "description": "Phòng oke",
+      "category": {
+        "id": 3,
+        "name": "Sam Sung"
+      }
+    },
+    {
+      "id": 7,
+      "name": "dsa",
+      "price": "32",
+      "description": "Phòng oke",
+      "category": {
+        "id": 2,
+        "name": "Sony"
+      }
+    }
+  ],
+  "categorys": [
+    {
+      "name": "Iphonex",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "Sony"
+    },
+    {
+      "id": 3,
+      "name": "Sam Sung"
+    },
+    {
+      "name": "cxzcxz",
+      "id": 4
+    }
+  ]
+}

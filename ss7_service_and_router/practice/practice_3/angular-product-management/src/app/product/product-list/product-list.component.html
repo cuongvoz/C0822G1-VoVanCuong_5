@@ -1,10 +1,11 @@
-<h1>Danh sách sản phẩm</h1>
+<h1 style="width: 100%;text-align: center;margin: 20px">Danh sách sản phẩm</h1>
 <table class="table">
   <thead>
   <tr>
     <td>STT</td>
     <td>Tên</td>
     <td>Giá</td>
+    <td>Danh Mục</td>
     <td>Mô tả</td>
     <td>
      <button class="btn btn-outline-primary" data-bs-target="#addmodal" data-bs-toggle="modal">Thêm Mới <i class="fa-sharp fa-solid fa-user-plus"></i></button>
@@ -12,10 +13,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let product of products; index as i">
+  <tr *ngFor="let product of products | paginate: { itemsPerPage: 2, currentPage: p}; index as i">
     <td>{{i + 1}}</td>
     <td>{{product.name}}</td>
     <td>{{product.price}}</td>
+    <td>{{product.category.name}}</td>
     <td>{{product.description}}</td>
     <td>
       <button data-bs-toggle="modal" (click)="edit(product)" data-bs-target="#editmodal" class="btn btn-outline-info"><i class="fa-sharp fa-solid fa-hammer"></i></button>
@@ -25,6 +27,7 @@
   </tr>
   </tbody>
 </table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
 <div class="modal" tabindex="-1" id="deletemodal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -44,10 +47,10 @@
   </div>
 </div>
 <div class="modal" tabindex="-1" id="editmodal">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Thêm mới sản phẩm <i class="fa-sharp fa-solid fa-user"></i></h5>
+        <h5 class="modal-title">Sửa thông tin sản phẩm <i class="fa-sharp fa-solid fa-user"></i></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="reset()" aria-label="Close"></button>
       </div>
       <form [formGroup]="formEdit"  method="post" (ngSubmit)="submit()">
@@ -57,6 +60,7 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Sản Phẩm</label>
             <div class="col-sm-10">
+              <input type="hidden" formControlName="id" class="form-control" name="id">
               <input type="text" formControlName="name" class="form-control" name="name">
             </div>
           </div>
@@ -72,7 +76,17 @@
             <input type="text" formControlName="description" class="form-control" name="description">
           </div>
         </div>
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Danh Mục</label>
+          <div class="col-sm-10">
+            <select formControlName="category" class="form-control" [compareWith]="compareFn">
+              <option  [ngValue]="" [disabled]="true">Chọn Danh Mục</option>
+              <option *ngFor="let x of categorys" [ngValue]="x">{{x.name}}</option>
+            </select>
+          </div>
+        </div>
       </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="reset()" data-bs-dismiss="modal">Hủy</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Xác Nhận</button>
@@ -91,7 +105,7 @@
       <form [formGroup]="formEdit"  method="post" (ngSubmit)="addSubMit()">
         <div class="modal-body">
 
-          <input type="hidden" formControlName="id">
+<!--          <input type="hidden" formControlName="id">-->
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Sản Phẩm</label>
             <div class="col-sm-10">
@@ -108,6 +122,16 @@
             <label class="col-sm-2 col-form-label">Mô Tả</label>
             <div class="col-sm-10">
               <input type="text" formControlName="description" class="form-control" name="description">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Danh Mục</label>
+            <div class="col-sm-10">
+              <select formControlName="category" class="form-control">
+                <option [ngValue]="null" [disabled]="true">Chọn Danh Mục</option>
+                <option *ngFor="let x of categorys" [ngValue]="x">{{x.name}}</option>
+              </select>
+
             </div>
           </div>
         </div>

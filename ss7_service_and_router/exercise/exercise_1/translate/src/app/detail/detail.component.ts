@@ -21,8 +21,12 @@ export class DetailComponent implements OnInit {
       if (name != null) {
         this.iword = service.findByName(name);
       }
-
+      const title = next.get('title');
+      if (title != null) {
+        alert(title)
+      }
     })
+
   }
 
   ngOnInit(): void {

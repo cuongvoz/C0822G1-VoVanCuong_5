@@ -1,2 +1,4 @@
 <h1>Dictionary Page</h1>
-<input type="text" name="name" #element> <button [routerLink]="['/detail/'+element.value]"  >Dịch</button>
+<input type="text" name="name" #element>
+<input type="text" name="name" #element2>
+<button [routerLink]="['/detail/'+element.value+'/'+element2.value]" class="btn btn-outline-info" >Dịch</button>

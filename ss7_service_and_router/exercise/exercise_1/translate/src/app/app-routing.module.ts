@@ -6,7 +6,7 @@ import {PageComponent} from "./page/page.component";
 
 const routes: Routes = [
   {path: '',component: PageComponent},
-  {path: 'detail/:name',component: DetailComponent}
+  {path: 'detail/:name/:title',component: DetailComponent}
 ];
 
 @NgModule({
