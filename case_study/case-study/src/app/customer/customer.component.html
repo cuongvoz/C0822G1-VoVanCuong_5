@@ -37,68 +37,27 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>1</td>
-        <td>Nguyễn Thị Hào</td>
-        <td>1970-11-07</td>
-        <td>Nữ</td>
-        <td>643431213</td>
-        <td>0945423362</td>
-        <td>thihao07@gmail.com</td>
-        <td>23 Nguyễn Hoàng, Đà Nẵng</td>
-        <td>Member</td>
+      <tr *ngFor="let x of customers | paginate: {itemsPerPage: 5 ,currentPage: p} ; index as i">
+        <td>{{i + 1}}</td>
+        <td>{{x.name}}</td>
+        <td>{{x.dateOfBirth | date: "fullDate"}}</td>
         <td>
-          <button class="btn btn-light" data-bs-toggle="modal"
+        <span *ngIf="x.gender == true">Nam</span>
+        <span *ngIf="x.gender == false">Nữ</span>
+        </td>
+        <td>{{x.iDCard}}</td>
+        <td>{{x.phoneNumber}}</td>
+        <td>{{x.email}}</td>
+        <td>{{x.address}}</td>
+        <td>{{x.customerType.name}}</td>
+        <td>
+          <button (click)="checkForUpdate(x)" class="btn btn-light" data-bs-toggle="modal"
                   data-bs-target="#editModal">
             <i class="fa-sharp fa-solid fa-pen-to-square"></i>
           </button>
         </td>
         <td>
-          <button class="btn btn-light" data-bs-toggle="modal"
-                  data-bs-target="#deleteModal"><i
-            class="fa-sharp fa-solid fa-user-slash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Phạm Xuân Diệu</td>
-        <td>1992-08-08</td>
-        <td>Nam</td>
-        <td>865342123</td>
-        <td>0954333333</td>
-        <td>xuandieu92@gmail.com</td>
-        <td>K77/22 Thái Phiên, Quảng Trị</td>
-        <td>Gold</td>
-        <td>
-          <button class="btn btn-light" data-bs-toggle="modal"
-                  data-bs-target="#editModal">
-            <i class="fa-sharp fa-solid fa-pen-to-square"></i>
-          </button>
-        </td>
-        <td>
-          <button class="btn btn-light" data-bs-toggle="modal"
-                  data-bs-target="#deleteModal"><i
-            class="fa-sharp fa-solid fa-user-slash"></i></button>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Trương Đình Nghệ</td>
-        <td>1990-02-27</td>
-        <td>Nam</td>
-        <td>488645199</td>
-        <td>0373213122</td>
-        <td>nghenhan2702@gmail.com</td>
-        <td>K323/12 Ông Ích Khiêm, Vinh</td>
-        <td>Diamond</td>
-        <td>
-          <button class="btn btn-light" data-bs-toggle="modal"
-                  data-bs-target="#editModal">
-            <i class="fa-sharp fa-solid fa-pen-to-square"></i>
-          </button>
-        </td>
-        <td>
-          <button class="btn btn-light" data-bs-toggle="modal"
+          <button (click)="checkForDelete(x.id,x.name)" class="btn btn-light" data-bs-toggle="modal"
                   data-bs-target="#deleteModal"><i
             class="fa-sharp fa-solid fa-user-slash"></i></button>
         </td>
@@ -106,59 +65,54 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-center">
-      <a class="btn btn-outline-light" style="margin: 4px" id="pre">Previous</a>
-      <button id="pagez" class="btn btn-outline-light" style="margin: 4px">1</button>
-      <a class="btn btn-outline-light" id="nex" style="margin: 4px">Next</a>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div> <br> <br> <br>
 </div>
 
 <div class="modal" tabindex="-1" id="addmodal">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Thêm mới khách hàng <i class="fa-sharp fa-solid fa-user"></i></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
-        <form  method="post" >
+        <form [formGroup]="formAdd" (ngSubmit)="addCustomer()">
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Tên Khách Hàng: </label>
             <div class="col-sm-10">
-              <input type="text" id="nameAdd" class="form-control" name="name">
+              <input type="text" formControlName="name" class="form-control" name="name">
               <p class="text-danger"></p>
             </div>
           </div>
-          <input type="hidden" name="validate" value="add">
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Sinh</label>
             <div class="col-sm-10">
-              <input type="date" id="dateOfBirthAdd"  class="form-control" name="birthday">
+              <input type="date" formControlName="dateOfBirth" class="form-control" name="dateOfBirth">
 
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Giới Tính</label>
             <div class="col-sm-10" id="genderCheck">
-              <input type="radio"  name="gender1" class="form-check-input"
-                     value="true"> Nam
-              <input type="radio" style="margin-left: 25px" name="gender1"
-                     class="form-check-input" value="false"> Nữ
-
+              <input type="radio" [value]="1"  formControlName="gender" name="gender" class="form-check-input"
+                     > Nam
+              <input type="radio" formControlName="gender" style="margin-left: 25px" name="gender"
+                     [value]="0"  class="form-check-input" > Nữ
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Số CMND</label>
             <div class="col-sm-10">
-              <input type="number" id="iDCardAdd"  class="form-control" name="iDCard">
+              <input type="number" formControlName="iDCard"  class="form-control" name="iDCard">
               <p  class="text-danger"></p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Số Điện Thoại </label>
             <div class="col-sm-10">
-              <input id="phoneNumberAdd" type="number" class="form-control"
+              <input formControlName="phoneNumber" type="number" class="form-control"
                      name="phoneNumber">
 
             </div>
@@ -166,28 +120,27 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Email </label>
             <div class="col-sm-10">
-              <input type="email" id="emailAdd" class="form-control" name="email">
-              <p th:errors="*{email}" class="text-danger"></p>
+              <input type="email" formControlName="email" id="email" class="form-control" name="email">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Địa Chỉ </label>
             <div class="col-sm-10">
-              <input type="text" id="addressAdd"  class="form-control" name="address">
+              <input type="text" formControlName="address"  class="form-control" name="address">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Kiểu Khách</label>
             <div class="col-sm-10">
-
-              <select  id="customerTypeAdd" class="form-select" name="customerType">
-                <option></option>
+              <select  formControlName="customerType" class="form-select" name="customerType">
+                <option disabled ngValue="">Chọn kiểu khách</option>
+                <option *ngFor="let x of customerTypes" [ngValue]="x">{{x.name}}</option>
               </select>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="submit" class="btn btn-primary">Xác Nhận</button>
+            <button type="submit" class="btn btn-primary"  [disabled]="formAdd.invalid"  data-bs-dismiss="modal">Xác Nhận</button>
           </div>
         </form>
       </div>
@@ -196,87 +149,70 @@
 </div>
 <!--</div>-->
 <div class="modal" tabindex="-1" id="editModal">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Sửa thông tin khách hàng <i class="fa-sharp fa-solid fa-user"></i></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/customer/add}" method="post" th:object="${customer}">
+        <form [formGroup]="formEdit" (ngSubmit)="updateCustomer()" >
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Họ Tên: </label>
             <div class="col-sm-10">
-              <input type="hidden" id="idEdit" th:field="*{id}">
-              <input type="text" id="nameEdit" th:field="*{name}" class="form-control" name="name">
-              <p th:errors="*{name}" class="text-danger"></p>
+              <input type="hidden" formControlName="id">
+              <input type="text" formControlName="name" class="form-control" name="name">
             </div>
           </div>
-          <input type="hidden" name="validate" value="edit">
-          <input type="hidden" name="modal" value="edit">
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Sinh</label>
             <div class="col-sm-10">
-              <input type="date" id="dateOfBirthEdit" th:field="*{dateOfBirth}" class="form-control"
-                     name="birthday">
-              <p th:errors="*{dateOfBirth}" class="text-danger"></p>
+              <input type="date"  formControlName="dateOfBirth" class="form-control" name="dateOfBirth">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Giới Tính</label>
             <div class="col-sm-10">
-              <input type="radio" id="genderS1" checked th:field="*{gender}" name="gender"
-                     class="form-check-input"
-                     value="true"> Nam
-              <input type="radio" id="genderS2" th:field="*{gender}" style="margin-left: 25px"
-                     name="gender"
-                     class="form-check-input" value="false"> Nữ
+              <input type="radio"  name="gender" formControlName="gender" [checked]="formEdit.controls.gender.value == 1" class="form-check-input" [value]="1" > Nam
+              <input type="radio"  name="gender" formControlName="gender" [checked]="formEdit.controls.gender.value == 0" class="form-check-input" [value]="0" > Nữ
 
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Số CMND</label>
             <div class="col-sm-10">
-              <input type="number" id="iDCardEdit" th:field="*{iDCard}" class="form-control"
-                     name="iDCard">
-              <p th:errors="*{iDCard}" class="text-danger"></p>
+              <input type="number" formControlName="iDCard" class="form-control" name="iDCard">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Số Điện Thoại </label>
             <div class="col-sm-10">
-              <input th:field="*{phoneNumber}" id="phoneNumberEdit" type="number" class="form-control"
-                     name="phoneNumber">
-              <p th:errors="*{phoneNumber}" class="text-danger"></p>
+              <input formControlName="phoneNumber" type="number" class="form-control" name="phoneNumber">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Email </label>
             <div class="col-sm-10">
-              <input type="email" id="emailEdit" th:field="*{email}" class="form-control" name="email">
+              <input type="email" formControlName="email" class="form-control" name="email">
             </div>
-            <p th:errors="*{email}" class="text-danger"></p>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Địa Chỉ </label>
             <div class="col-sm-10">
-              <input type="text" id="addressEdit" th:field="*{address}" class="form-control"
-                     name="address">
-              <p th:errors="*{address}" class="text-danger"></p>
+              <input type="text" formControlName="address" class="form-control" name="address">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Kiểu Khách</label>
             <div class="col-sm-10">
-              <select th:field="*{customerType}" id="typeEdit" class="form-select" name="customerType">
-                <option th:each="type : ${listType}" th:value="${type.id}"
-                        th:text="${type.name}"></option>
+              <select formControlName="customerType" class="form-select" name="customerType" [compareWith]="compareFN">
+                <option *ngFor="let x of customerTypes" [ngValue]="x">{{x.name}}</option>
               </select>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="submit" class="btn btn-primary">Xác Nhận</button>
+            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Xác Nhận</button>
           </div>
         </form>
       </div>
@@ -309,13 +245,13 @@
       <form  method="post">
         <div class="modal-body">
           <p>Bạn có chắc chắn muốn xóa <b>
-            <span id="nameDelete"></span>
+            <span >{{nameZ}}</span>
           </b> ?</p>
         </div>
         <input type="hidden" name="id" id="idDelete">
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-          <button type="submit" class="btn btn-primary">Xóa</button>
+          <button type="button" data-bs-dismiss="modal" (click)="deleteCustomer()" class="btn btn-primary">Xóa</button>
         </div>
       </form>
 

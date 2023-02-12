@@ -5,6 +5,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {log} from 'util';
 import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
+import {ActivatedRoute} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-list',
@@ -23,16 +25,48 @@ export class ProductListComponent implements OnInit {
     name: new FormControl(),
     price: new FormControl(),
     description: new FormControl(),
+    img: new FormControl(),
     category: new FormControl()
     }
   );
-  constructor(private productService: ProductService, private categoryService: CategoryService) {
-    // this.productService.getAll().subscribe( next => {
-    //   this.products = next;
-    // }, error => {
-    //   alert('Lỗi');
-    //   },
-    //   () => {});
+  constructor(private productService: ProductService, private categoryService: CategoryService
+              // tslint:disable-next-line:align
+              , private activate: ActivatedRoute, private toast: ToastrService) {
+    this.activate.paramMap.subscribe( next => {
+      const categoryId = next.get('category');
+      if (categoryId != null && categoryId !== '') {
+        // tslint:disable-next-line:radix
+        this.productService.findByCategory( parseInt(categoryId)).subscribe(
+          // tslint:disable-next-line:no-shadowed-variable
+          next => {
+            this.products = next;
+          }
+        );
+      }
+    });
+    // @ts-ignore
+    this.activate.paramMap.subscribe( next => {
+      const name = next.get('name');
+      const id = next.get('category');
+      // this.toast.info(' Đã bắt đc tên là ' + name + ' và id là ' + id);
+      if (name != null && name !== '' && id == null || id === 'all' || id === 'zz') {
+        this.productService.findByName( name).subscribe(
+          // tslint:disable-next-line:no-shadowed-variable
+          next => {
+            this.products = next;
+          }
+        );
+        // tslint:disable-next-line:radix
+      } else if (name != null && name !== '' && !isNaN(parseInt(id))) {
+        // tslint:disable-next-line:radix
+        this.productService.findByNameAndCategory( name, parseInt(id)).subscribe(
+          // tslint:disable-next-line:no-shadowed-variable
+          next => {
+            this.products = next;
+          }
+        );
+      }
+    });
     this.categoryService.getAll().subscribe(next => {
       this.categorys = next;
       },
@@ -76,8 +110,10 @@ export class ProductListComponent implements OnInit {
     this.category = product.category;
   }
   submit() {
+    const product = this.formEdit.value;
     const temp = this.productService.updateProduct(this.formEdit.value).subscribe( next => {
       this.ngOnInit();
+      this.toast.info('Đã thay đổi thành công thông tin của sản phẩm ' + product.name, 'Thay Đổi Thành Công');
     }, error => {
       alert('thêm mới ko thành công');
     });
@@ -88,6 +124,7 @@ export class ProductListComponent implements OnInit {
     console.log(this.formEdit.value);
     const product = this.formEdit.value;
     this.productService.saveProduct(this.formEdit.value).subscribe(next => {
+      this.toast.info('Thêm mới thành công ' + product.name);
       this.ngOnInit();
     }, error => {
       alert('thêm mới thành công');
@@ -97,5 +134,9 @@ export class ProductListComponent implements OnInit {
 
   reset() {
     this.formEdit.reset();
+  }
+
+  buy(name: string) {
+    this.toast.success('Đã mua thành công sản phẩm ' + name);
   }
 }

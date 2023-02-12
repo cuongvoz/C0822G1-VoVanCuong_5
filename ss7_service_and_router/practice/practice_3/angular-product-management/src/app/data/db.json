@@ -5,9 +5,10 @@
       "name": "IPhone 11",
       "price": 1560000,
       "description": "Like new",
+      "img": "https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-trang-200x200.jpg",
       "category": {
-        "id": 3,
-        "name": "Sony"
+        "name": "Apple",
+        "id": 1
       }
     },
     {
@@ -15,36 +16,40 @@
       "name": "IPhone X",
       "price": 968000,
       "description": "97%",
+      "img": "https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg",
       "category": {
-        "name": "cxzcxz",
-        "id": 4
+        "name": "Apple",
+        "id": 1
       }
     },
     {
       "id": 4,
-      "name": "IPhone 8ccc",
-      "price": 7540000,
+      "name": "Sony Xperia",
+      "price": "9999999999999",
       "description": "98%",
-      "category": {
-        "id": 1,
-        "name": "Iphone"
-      }
-    },
-    {
-      "id": 5,
-      "name": "cxzczx",
-      "price": "cxzczx",
-      "description": "czxczx",
+      "img": "https://www.sony.com.vn/image/7bf2ad5873a6005dce72bbd851bb0490?fmt=pjpeg&resMode=bisharp&wid=360",
       "category": {
         "id": 2,
         "name": "Sony"
       }
     },
     {
+      "id": 5,
+      "name": "IPhone 14",
+      "price": "2000",
+      "description": "Điện thoại mới",
+      "img": "https://cdn.tgdd.vn/Products/Images/42/289691/iphone-14-pro-bac-thumb-600x600.jpg",
+      "category": {
+        "name": "Apple",
+        "id": 1
+      }
+    },
+    {
       "id": 6,
-      "name": "Cường",
-      "price": "321321",
-      "description": "Phòng oke",
+      "name": "Samsung Z Flip 4",
+      "price": "5000",
+      "description": "Điện Thoại Gập",
+      "img": "https://cdn1.viettelstore.vn/images/Product/ProductImage/medium/flip4.jpeg",
       "category": {
         "id": 3,
         "name": "Sam Sung"
@@ -52,18 +57,85 @@
     },
     {
       "id": 7,
-      "name": "dsa",
-      "price": "32",
-      "description": "Phòng oke",
+      "name": "Samsung Galaxy S21",
+      "price": "2000",
+      "description": "Đây là dòng máy đời Cũ",
+      "img": "https://cdn.tgdd.vn/Products/Images/42/220833/samsung-galaxy-s21-tim-600x600.jpg",
+      "category": {
+        "id": 3,
+        "name": "Sam Sung"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Galaxy S10 Plus Mỹ",
+      "price": "39000",
+      "description": "Điện thoại này hết hàng rồi",
+      "img": "https://www.duchuymobile.com/images/detailed/23/s10-plus-512gb-my-trang.jpg",
+      "category": {
+        "id": 3,
+        "name": "Sam Sung"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Sony Xperia 1 III",
+      "price": "34000",
+      "description": "Điện thoại của sony đấy",
+      "img": "https://cdn.tgdd.vn/Products/Images/42/229399/sony-xperia-1-iii-1-600x600.jpg",
       "category": {
         "id": 2,
         "name": "Sony"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Xperia XA1 Ultra",
+      "price": "34000",
+      "description": "Điện thoại của nokia đấy",
+      "img": "https://www.duchuymobile.com/images/detailed/10/xa1-ultra-%C4%91en.jpg",
+      "category": {
+        "id": 2,
+        "name": "Sony"
+      }
+    },
+    {
+      "id": 15,
+      "name": "Nokia x1",
+      "price": "3000",
+      "description": "Điện thoại cục gạch",
+      "img": "https://fptshop.com.vn/Content/Images/uploaded/Phone%20IMG/Nokia/nokia-x1-01-1.jpg",
+      "category": {
+        "name": "Nokia",
+        "id": 4
+      }
+    },
+    {
+      "id": 16,
+      "name": "Nokia Lumia",
+      "price": "4000",
+      "description": "Máy đời nhà tống",
+      "img": "https://fptshop.com.vn/Content/Images/uploaded/Nokia%20Lumia%20920.jpg",
+      "category": {
+        "name": "Nokia",
+        "id": 4
+      }
+    },
+    {
+      "id": 17,
+      "name": "Sam Sung Galaxy Z Fold 4",
+      "price": 5000,
+      "description": "Điện thoại gập màn hình siêu to khổng lồ",
+      "img": "https://images.samsung.com/uk/smartphones/galaxy-z-fold4/buy/05_Color-Selection_Basic-Color/Q4_color-selection_MO_graygreen.png",
+      "category": {
+        "id": 3,
+        "name": "Sam Sung"
       }
     }
   ],
   "categorys": [
     {
-      "name": "Iphonex",
+      "name": "Apple",
       "id": 1
     },
     {
@@ -75,7 +147,7 @@
       "name": "Sam Sung"
     },
     {
-      "name": "cxzcxz",
+      "name": "Nokia",
       "id": 4
     }
   ]

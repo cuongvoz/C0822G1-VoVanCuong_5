@@ -19,6 +19,19 @@ const routes: Routes = [
   }, {
     path: 'edit/:id',
     component: ProductUpdateComponent
+  },
+  {
+    path: 'list/:name',
+    component: ProductListComponent
+  },
+  {
+    path: 'list/:name/:category',
+    component: ProductListComponent
+  }
+  ,
+  {
+    path: 'search/:category',
+    component: ProductListComponent
   }
 ];
 

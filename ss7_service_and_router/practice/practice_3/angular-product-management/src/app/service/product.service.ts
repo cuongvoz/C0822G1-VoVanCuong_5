@@ -27,4 +27,18 @@ export class ProductService {
   findById(id: number): Observable<Product> {
     return this.httpClient.get('http://localhost:3000/product/' + id);
   }
+  // @ts-ignore
+  findByName(name: string): Observable<Product[]> {
+    // @ts-ignore
+    return this.httpClient.get('http://localhost:3000/product?name_like=' + name);
+  }
+  findByNameAndCategory(name: string, categoryID: number): Observable<Product[]> {
+    // @ts-ignore
+    return this.httpClient.get('http://localhost:3000/product?name_like=' + name + '&category.id=' + categoryID);
+  }
+  // @ts-ignore
+  findByCategory(id: number): Observable<Product[]> {
+    // @ts-ignore
+    return this.httpClient.get('http://localhost:3000/product?category.id=' + id);
+  }
 }

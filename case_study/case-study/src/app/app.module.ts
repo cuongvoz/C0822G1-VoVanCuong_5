@@ -9,7 +9,9 @@ import { FooterComponent } from './footer/footer.component';
 import { CustomerComponent } from './customer/customer.component';
 import { FacilityComponent } from './facility/facility.component';
 import { ContractComponent } from './contract/contract.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -21,11 +23,14 @@ import {FormsModule} from "@angular/forms";
     FacilityComponent,
     ContractComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgxPaginationModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

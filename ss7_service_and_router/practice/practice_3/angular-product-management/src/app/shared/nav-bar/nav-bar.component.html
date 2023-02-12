@@ -15,19 +15,29 @@
       </a>
 
       <!-- Search form -->
-      <form class="input-group w-auto my-auto d-none d-sm-flex">
+      <div class="input-group w-auto my-auto d-none d-sm-flex">
         <input
           autocomplete="off"
           type="search"
           class="form-control rounded"
           placeholder="Search"
           style="min-width: 125px;"
+          [value]=""
+          #element
+          (keyup.enter)="sendName(element.value,selectElement.value)"
         />
-        <span class="input-group-text border-0 d-none d-lg-flex"
+        <span  (click)="sendName(element.value,selectElement.value)" style="cursor: pointer" class="input-group-text border-0 d-none d-lg-flex"
         ><i class="fas fa-search"></i
         ></span>
-      </form>
+      </div>
+      <div style="margin-left: 50px"  class="input-group w-auto my-auto d-none d-sm-flex">
+        <select #selectElement class="form-select" (change)="findCategory($event.target)">
+        <option [value]="'zz'"  selected disabled >Danh Mục</option>
+        <option [value]="'all'"  >Tất cả</option>
+        <option  *ngFor="let x of categorys"  [value]="x.id" >{{x.name}}</option>
+      </select></div>
     </div>
+
     <!-- Left elements -->
 
     <!-- Center elements -->
@@ -71,13 +81,13 @@
       <li class="nav-item me-3 me-lg-1">
         <a class="nav-link d-sm-flex align-items-sm-center" href="#">
           <img
-            src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
+            src="https://media.wired.com/photos/5f87340d114b38fa1f8339f9/master/w_1600%2Cc_limit/Ideas_Surprised_Pikachu_HD.jpg"
             class="rounded-circle"
             height="22"
             alt="Black and White Portrait of a Man"
             loading="lazy"
           />
-          <strong class="d-none d-sm-block ms-1">John</strong>
+          <strong class="d-none d-sm-block ms-1">Cường</strong>
         </a>
       </li>
       <li class="nav-item me-3 me-lg-1">

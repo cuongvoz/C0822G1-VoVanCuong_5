@@ -37,81 +37,17 @@
     </tr>
     </thead>
     <tbody id="my-body">
-    <tr>
-      <th>1</th>
-      <th>Villa Beach Front</th>
-      <th>Nguyễn Văn An</th>
-      <th>Nguyễn Thị Hào</th>
-      <th>2020-12-08</th>
-      <th>2020-12-08</th>
-      <th>0đ</th>
+    <tr *ngFor="let x of contracts; index as i">
+      <th>{{i + 1}}</th>
+      <th>{{x.facility.name}}</th>
+      <th>{{x.employee.name}}</th>
+      <th>{{x.customer.name}}</th>
+      <th>{{x.startDay | date: "longDate"}}</th>
+      <th>{{x.endDay | date: "longDate"}}</th>
+      <th>{{x.cost | currency}}</th>
       <th>9000000đ</th>
       <th>
-        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
-        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
-                onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
-        </button>
-      </th>
-    </tr>
-    <tr>
-      <th>2</th>
-      <th>House Princess 01</th>
-      <th>Lê Văn Bình</th>
-      <th>Phạm Xuân Diệu</th>
-      <th>2020-07-14</th>
-      <th>2020-07-21</th>
-      <th>200000đ</th>
-      <th>15000000đ</th>
-      <th>
-        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
-        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
-                onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
-        </button>
-      </th>
-    </tr>
-    <tr>
-      <th>3</th>
-      <th>Room Twin 01</th>
-      <th>Hồ Thị Yến</th>
-      <th>Trương Đình Nghệ</th>
-      <th>2021-03-15</th>
-      <th>2021-03-17</th>
-      <th>50000đ</th>
-      <th>13000000đ</th>
-      <th>
-        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
-        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
-                onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
-        </button>
-      </th>
-    </tr>
-    <tr>
-      <th>4</th>
-      <th>Villa No Beach Front</th>
-      <th>Võ Công Toản</th>
-      <th>Dương Văn Quan</th>
-      <th>2021-01-14</th>
-      <th>2021-01-18</th>
-      <th>100000đ</th>
-      <th>100000000đ</th>
-      <th>
-        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
-        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
-                onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
-        </button>
-      </th>
-    </tr>
-    <tr>
-      <th>5</th>
-      <th>House Princess 02</th>
-      <th>Nguyễn Bỉnh Phát</th>
-      <th>Hoàng Trần Nhi Nhi</th>
-      <th>2021-07-14</th>
-      <th>2021-07-15</th>
-      <th>0đ</th>
-      <th>9000000đ</th>
-      <th>
-        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
+        <button class="btn btn-outline-light" (click)="checkForEdit(x)" data-bs-toggle="modal" data-bs-target="#editModal">+</button>
         <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#viewAttachFacility"
                 onclick="showListAttachFacility(${data[i].id})">Danh Sách Dịch Vụ Đi Kèm
         </button>
@@ -195,68 +131,68 @@
   </div>
 </div>
 <div class="modal" tabindex="-1" id="addmodal">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Tạo Hợp Đồng <i class="fa-sharp fa-solid fa-user"></i></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/contract/addContract}" method="post" th:object="${contract}">
+        <form [formGroup]="formAdd" (ngSubmit)="createContract()">
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Bắt Đầu</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" id="addStartDate" th:field="*{startDate}">
+              <input type="date" class="form-control" formControlName="startDay">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Kết Thúc</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" id="addEndDate" th:field="*{endDate}">
+              <input type="date" class="form-control" formControlName="endDay">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Tiền Gửi</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" onchange="validate()" id="addDeposit" th:field="*{deposit}">
+              <input type="number" class="form-control" formControlName="cost">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Tổng Tiền</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" readonly id="tongTien">
+              <input type="number" class="form-control" readonly >
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Khách Hàng</label>
             <div class="col-sm-10">
-              <select class="form-control" id="addCutomer" th:field="*{customer}">
-                <option th:each="customer : ${customerList}" th:text="${customer.name}"
-                        th:value="${customer.id}"></option>
+              <select class="form-control" formControlName="customer">
+                <option [value]="null" [selected]="true" [disabled]="true" >Chọn khách hàng</option>
+                <option *ngFor="let x of customers" [ngValue]="x" >{{x.name}}</option>
               </select>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Nhân Viên</label>
             <div class="col-sm-10">
-              <select class="form-control" id="addEmployee" th:field="*{employee}">
-                <option th:each="employee : ${employeeList}" th:text="${employee.name}"
-                        th:value="${employee.id}"></option>
+              <select class="form-control" formControlName="employee">
+                <option [value]="null" [selected]="true" [disabled]="true" >Chọn nhân viên</option>
+                <option *ngFor="let x of employees" [ngValue]="x" >{{x.name}}</option>
               </select>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Dịch Vụ</label>
             <div class="col-sm-10">
-              <select class="form-control" id="addFacility" th:field="*{facility}">
-                <option th:each="facility : ${facilityList}" th:text="${facility.name}"
-                        th:value="${facility.id}"></option>
+              <select class="form-control" formControlName="facility">
+                <option [value]="null" [selected]="true" [disabled]="true" >Chọn dịch vụ</option>
+                <option *ngFor="let x of facilitys" [ngValue]="x" >{{x.name}}</option>
               </select>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="button" onclick="addContract()" class="btn btn-primary">Xác Nhận</button>
+            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Xác Nhận</button>
           </div>
         </form>
       </div>
@@ -272,24 +208,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/contract/addContract}" method="post" th:object="${contract}">
+        <form [formGroup]="formEdit" (ngSubmit)="updateContract()">
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Bắt Đầu</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" id="startNewDate" th:field="*{startDate}">
-              <input type="hidden" class="form-control" id="idEdit" th:field="*{id}">
+              <input type="date" class="form-control" formControlName="startDay">
+              <input type="hidden" class="form-control" formControlName="id">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Kết Thúc</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" id="endNewEdit" th:field="*{endDate}">
+              <input type="date" class="form-control" formControlName="endDay">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Tiền Gửi</label>
             <div class="col-sm-10">
-              <input type="number" id="depositEdit" class="form-control" th:field="*{deposit}">
+              <input type="number" id="depositEdit" class="form-control" formControlName="cost">
             </div>
           </div>
           <div class="mb-3 row">
@@ -301,27 +237,27 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Khách Hàng</label>
             <div class="col-sm-10">
-              <select class="form-control" id="customerEdit" th:field="*{customer}">
-                <option th:each="customer : ${customerList}" th:text="${customer.name}"
-                        th:value="${customer.id}"></option>
+              <select class="form-control" formControlName="customer" [compareWith]="compareFN">
+                <option [value]="null" [selected]="true" [disabled]="true" >Chọn khách hàng</option>
+                <option *ngFor="let x of customers" [ngValue]="x" >{{x.name}}</option>
               </select>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Nhân Viên</label>
             <div class="col-sm-10">
-              <select class="form-control" id="employeeEdit" th:field="*{employee}">
-                <option th:each="employee : ${employeeList}" th:text="${employee.name}"
-                        th:value="${employee.id}"></option>
+              <select class="form-control" formControlName="employee" [compareWith]="compareFN">
+                <option [value]="null" [selected]="true" [disabled]="true" >Chọn nhân viên</option>
+                <option *ngFor="let x of employees" [ngValue]="x" >{{x.name}}</option>
               </select>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Dịch Vụ</label>
             <div class="col-sm-10">
-              <select class="form-control" id="facilityEdit" th:field="*{facility}">
-                <option th:each="facility : ${facilityList}" th:text="${facility.name}"
-                        th:value="${facility.id}"></option>
+              <select class="form-control" formControlName="facility" [compareWith]="compareFN">
+                <option [value]="null" [selected]="true" [disabled]="true" >Chọn dịch vụ</option>
+                <option *ngFor="let x of facilitys" [ngValue]="x" >{{x.name}}</option>
               </select>
             </div>
           </div>
@@ -336,7 +272,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="button" onclick="updateContract2()" class="btn btn-primary">Xác Nhận</button>
+            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Xác Nhận</button>
           </div>
         </form>
       </div>

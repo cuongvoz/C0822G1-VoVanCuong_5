@@ -1,0 +1,879 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "name": "Nguyễn Thị Hào",
+      "dateOfBirth": "1970-11-07",
+      "gender": "0",
+      "iDCard": "643431213",
+      "phoneNumber": "0945423362",
+      "email": "thihao07@gmail.com",
+      "address": "23 Nguyễn Hoàng, Đà Nẵng",
+      "customerType": {
+        "id": 4,
+        "name": "Silver"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Phạm Xuân Diệu",
+      "dateOfBirth": "1992-08-08",
+      "gender": "1",
+      "iDCard": "865342123",
+      "phoneNumber": "0954333333",
+      "email": "xuandieu92@gmail.com",
+      "address": "K77/22 Thái Phiên, Quảng Trị",
+      "customerType": {
+        "id": 3,
+        "name": "Gold"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Trương Đình Nghệ",
+      "dateOfBirth": "1990-02-27",
+      "gender": "1",
+      "iDCard": "488645199",
+      "phoneNumber": "0373213122",
+      "email": "nghenhan2702@gmail.com",
+      "address": "K323/12 Ông Ích Khiêm, Vinh",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Dương Văn Quan",
+      "dateOfBirth": "1981-07-08",
+      "gender": "1",
+      "iDCard": "543432111",
+      "phoneNumber": "0490039241",
+      "email": "duongquan@gmail.com",
+      "address": "K453/12 Lê Lợi, Đà Nẵng",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": "5",
+      "name": "Hoàng Trần Nhi Nhi",
+      "dateOfBirth": "1995-12-09",
+      "gender": "0",
+      "iDCard": "795453345",
+      "phoneNumber": "0312345678",
+      "email": "nhinhi123@gmail.com",
+      "address": "224 Lý Thái Tổ, Gia Lai",
+      "customerType": {
+        "id": 4,
+        "name": "Silver"
+      }
+    },
+    {
+      "id": "6",
+      "name": "Tôn Nữ Mộc Châu",
+      "dateOfBirth": "2005-12-06",
+      "gender": "0",
+      "iDCard": "732434215",
+      "phoneNumber": "0988888844",
+      "email": "tonnuchau@gmail.com",
+      "address": "37 Yên Thế, Đà Nẵng",
+      "customerType": {
+        "id": 4,
+        "name": "Silver"
+      }
+    },
+    {
+      "id": "7",
+      "name": "Nguyễn Mỹ Kim",
+      "dateOfBirth": "1984-04-08",
+      "gender": "0",
+      "iDCard": "856453123",
+      "phoneNumber": "0912345698",
+      "email": "kimcuong84@gmail.com",
+      "address": "K123/45 Lê Lợi, Hồ Chí Minh",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": "8",
+      "name": "Nguyễn Thị Hào",
+      "dateOfBirth": "1999-04-08",
+      "gender": "0",
+      "iDCard": "965656433",
+      "phoneNumber": "0763212345",
+      "email": "haohao99@gmail.com",
+      "address": "55 Nguyễn Văn Linh, Kon Tum",
+      "customerType": {
+        "id": 3,
+        "name": "Gold"
+      }
+    },
+    {
+      "id": "9",
+      "name": "Trần Đại Danh",
+      "dateOfBirth": "1994-07-01",
+      "gender": "1",
+      "iDCard": "432341235",
+      "phoneNumber": "0643343433",
+      "email": "danhhai99@gmail.com",
+      "address": "24 Lý Thường Kiệt, Quảng Ngãi",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": "10",
+      "name": "Nguyễn Tâm Đắc",
+      "dateOfBirth": "1989-07-01",
+      "gender": "1",
+      "iDCard": "344343432",
+      "phoneNumber": "0987654321",
+      "email": "dactam@gmail.com",
+      "address": "22 Ngô Quyền, Đà Nẵng",
+      "customerType": {
+        "id": 2,
+        "name": "Platinium"
+      }
+    }
+  ],
+  "customerTypes": [
+    {
+      "id": 1,
+      "name": "Diamond"
+    },
+    {
+      "id": 2,
+      "name": "Platinium"
+    },
+    {
+      "id": 3,
+      "name": "Gold"
+    },
+    {
+      "id": 4,
+      "name": "Silver"
+    },
+    {
+      "id": 5,
+      "name": "Member"
+    }
+  ],
+  "facilitys": [
+    {
+      "id": "2",
+      "name": "House Princess 01",
+      "area": "14000",
+      "cost": "5000000",
+      "image": "https://images.squarespace-cdn.com/content/v1/5aadf482aa49a1d810879b88/1626698419120-J7CH9BPMB2YI728SLFPN/1.jpg",
+      "maxPeople": "7",
+      "standard": "vip",
+      "description": "Có thêm bếp nướng",
+      "poolArea": "null",
+      "floor": "3",
+      "facilityFree": "null",
+      "rentType": {
+        "id": "3",
+        "name": "day"
+      },
+      "facilityType": {
+        "id": "2",
+        "name": "House"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Room Twin 01",
+      "image": "https://www.hotelgrandsaigon.com/wp-content/uploads/sites/227/2017/12/GRAND_PDLK_01.jpg",
+      "area": "5000",
+      "cost": "1000000",
+      "maxPeople": "2",
+      "standard": "normal",
+      "description": "Có tivi",
+      "poolArea": "null",
+      "floor": "null",
+      "facilityFree": "1 Xe máy, 1 Xe đạp",
+      "rentType": {
+        "id": "4",
+        "name": "hour"
+      },
+      "facilityType": {
+        "id": "3",
+        "name": "Room"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Villa No Beach Front",
+      "area": "22000",
+      "cost": "9000000",
+      "image": "https://pistachiohotel.com/UploadFile/Gallery/Overview/a3.jpg",
+      "maxPeople": "8",
+      "standard": "normal",
+      "description": "Có hồ bơi",
+      "poolArea": "300",
+      "floor": "3",
+      "facilityFree": "null",
+      "rentType": {
+        "id": "3",
+        "name": "day"
+      },
+      "facilityType": {
+        "id": "1",
+        "name": "Villa"
+      }
+    },
+    {
+      "id": "5",
+      "name": "House Princess 02",
+      "area": "10000",
+      "cost": "4000000",
+      "image": "https://kconceptvn.com/wp-content/uploads/2020/04/hotel-photography-chup-anh-khach-san-resortNovotel-phu-quoc-resort-02.jpg",
+      "maxPeople": "5",
+      "standard": "normal",
+      "description": "Có thêm bếp nướng",
+      "poolArea": "null",
+      "floor": "2",
+      "facilityFree": "null",
+      "rentType": {
+        "id": "3",
+        "name": "day"
+      },
+      "facilityType": {
+        "id": "2",
+        "name": "House"
+      }
+    },
+    {
+      "id": "6",
+      "name": "Room Twin 02",
+      "area": "3000",
+      "cost": "900000",
+      "image": "https://asiky.com/files/images/Article/tin-tuc/chup-anh-khach-san.jpg",
+      "maxPeople": "2",
+      "standard": "normal",
+      "description": "Có tivi",
+      "poolArea": "null",
+      "floor": "null",
+      "facilityFree": "1 Xe máy",
+      "rentType": {
+        "id": "4",
+        "name": "hour"
+      },
+      "facilityType": {
+        "id": "3",
+        "name": "Room"
+      }
+    }
+  ],
+  "facilityTypes": [
+    {
+      "id": "1",
+      "name": "Villa"
+    },
+    {
+      "id": "2",
+      "name": "House"
+    },
+    {
+      "id": "3",
+      "name": "Room"
+    }
+  ],
+  "rentTypes": [
+    {
+      "id": "1",
+      "name": "year"
+    },
+    {
+      "id": "2",
+      "name": "month"
+    },
+    {
+      "id": "3",
+      "name": "day"
+    },
+    {
+      "id": "4",
+      "name": "hour"
+    }
+  ],
+  "contracts": [
+    {
+      "id": "1",
+      "startDay": "2020-12-08",
+      "endDay": "2020-12-08",
+      "cost": "0",
+      "employee": {
+        "id": "3",
+        "name": "Hồ Thị Yến"
+      },
+      "customer": {
+        "id": "1",
+        "name": "Nguyễn Thị Hào"
+      },
+      "facility": {
+        "id": "3",
+        "name": "Room Twin 01"
+      }
+    },
+    {
+      "id": "2",
+      "startDay": "2020-07-14",
+      "endDay": "2020-07-21",
+      "cost": "200000",
+      "employee": {
+        "id": "7",
+        "name": "Nguyễn Hữu Hà"
+      },
+      "customer": {
+        "id": "3",
+        "name": "Trương Đình Nghệ"
+      },
+      "facility": {
+        "id": "1",
+        "name": "Villa Beach Front"
+      }
+    },
+    {
+      "id": "3",
+      "startDay": "2021-03-15",
+      "endDay": "2021-03-17",
+      "cost": "50000",
+      "employee": {
+        "id": "3",
+        "name": "Hồ Thị Yến"
+      },
+      "customer": {
+        "id": "4",
+        "name": "Dương Văn Quan"
+      },
+      "facility": {
+        "id": "2",
+        "name": "House Princess 01"
+      }
+    },
+    {
+      "id": "4",
+      "startDay": "2021-01-14",
+      "endDay": "2021-01-18",
+      "cost": "100000",
+      "employee": {
+        "id": "7",
+        "name": "Nguyễn Hữu Hà"
+      },
+      "customer": {
+        "id": "5",
+        "name": "Hoàng Trần Nhi Nhi"
+      },
+      "facility": {
+        "id": "5",
+        "name": "House Princess 02"
+      }
+    },
+    {
+      "id": "5",
+      "startDay": "2021-07-14",
+      "endDay": "2021-07-15",
+      "cost": "0",
+      "employee": {
+        "id": "7",
+        "name": "Nguyễn Hữu Hà"
+      },
+      "customer": {
+        "id": "2",
+        "name": "Phạm Xuân Diệu"
+      },
+      "facility": {
+        "id": "6",
+        "name": "Room Twin 02"
+      }
+    },
+    {
+      "id": "6",
+      "startDay": "2021-06-01",
+      "endDay": "2021-06-03",
+      "cost": "0",
+      "employee": {
+        "id": "7",
+        "name": "Nguyễn Hữu Hà"
+      },
+      "customer": {
+        "id": "7",
+        "name": "Nguyễn Mỹ Kim"
+      },
+      "facility": {
+        "id": "6",
+        "name": "Room Twin 02"
+      }
+    },
+    {
+      "id": "7",
+      "startDay": "2021-09-02",
+      "endDay": "2021-09-05",
+      "cost": "100000",
+      "employee": {
+        "id": "7",
+        "name": "Nguyễn Hữu Hà"
+      },
+      "customer": {
+        "id": "4",
+        "name": "Dương Văn Quan"
+      },
+      "facility": {
+        "id": "4",
+        "name": "Villa No Beach Front"
+      }
+    },
+    {
+      "id": "8",
+      "startDay": "2021-06-17",
+      "endDay": "2021-06-18",
+      "cost": "150000",
+      "employee": {
+        "id": "3",
+        "name": "Hồ Thị Yến"
+      },
+      "customer": {
+        "id": "4",
+        "name": "Dương Văn Quan"
+      },
+      "facility": {
+        "id": "1",
+        "name": "Villa Beach Front"
+      }
+    },
+    {
+      "id": "9",
+      "startDay": "2020-11-19",
+      "endDay": "2020-11-19",
+      "cost": "0",
+      "employee": {
+        "id": "3",
+        "name": "Hồ Thị Yến"
+      },
+      "customer": {
+        "id": "4",
+        "name": "Dương Văn Quan"
+      },
+      "facility": {
+        "id": "3",
+        "name": "Room Twin 01"
+      }
+    },
+    {
+      "id": "10",
+      "startDay": "2021-04-12",
+      "endDay": "2021-04-14",
+      "cost": "0",
+      "employee": {
+        "id": "10",
+        "name": "Nguyễn Công Đạo"
+      },
+      "customer": {
+        "id": "3",
+        "name": "Trương Đình Nghệ"
+      },
+      "facility": {
+        "id": "5",
+        "name": "House Princess 02"
+      }
+    },
+    {
+      "id": "11",
+      "startDay": "2021-04-25",
+      "endDay": "2021-04-25",
+      "cost": "0",
+      "employee": {
+        "id": "2",
+        "name": "Lê Văn Bình"
+      },
+      "customer": {
+        "id": "2",
+        "name": "Phạm Xuân Diệu"
+      },
+      "facility": {
+        "id": "1",
+        "name": "Villa Beach Front"
+      }
+    },
+    {
+      "id": "12",
+      "startDay": "2021-05-25",
+      "endDay": "2021-05-27",
+      "cost": "0",
+      "employee": {
+        "id": "7",
+        "name": "Nguyễn Hữu Hà"
+      },
+      "customer": {
+        "id": "10",
+        "name": "Nguyễn Tâm Đắc"
+      },
+      "facility": {
+        "id": "2",
+        "name": "House Princess 01",
+        "area": "14000",
+        "cost": "5000000",
+        "image": "https://images.squarespace-cdn.com/content/v1/5aadf482aa49a1d810879b88/1626698419120-J7CH9BPMB2YI728SLFPN/1.jpg",
+        "maxPeople": "7",
+        "standard": "vip",
+        "description": "Có thêm bếp nướng",
+        "poolArea": "null",
+        "floor": "3",
+        "facilityFree": "null",
+        "rentType": {
+          "id": "3",
+          "name": "day"
+        },
+        "facilityType": {
+          "id": "2",
+          "name": "House"
+        }
+      }
+    },
+    {
+      "id": "QaCkwDW",
+      "startDay": "2023-02-24",
+      "endDay": "2023-02-24",
+      "cost": 23213213888888890000,
+      "employee": {
+        "id": "9",
+        "name": "Tòng Hoang",
+        "dateOfBirth": "1982-09-03",
+        "iDCard": "256781231",
+        "salary": "6000000",
+        "phoneNumber": "0245144444",
+        "email": "hoangtong@gmail.com",
+        "address": "213 Hàm Nghi, Đà Nẵng",
+        "position": {
+          "id": "2",
+          "name": "Nhân Viên"
+        },
+        "education": {
+          "id": "4",
+          "name": "Sau Đại Học"
+        },
+        "division": {
+          "id": "4",
+          "name": "Giám sát"
+        }
+      },
+      "customer": {
+        "id": "9",
+        "name": "Trần Đại Danh",
+        "dateOfBirth": "1994-07-01",
+        "gender": "1",
+        "iDCard": "432341235",
+        "phoneNumber": "0643343433",
+        "email": "danhhai99@gmail.com",
+        "address": "24 Lý Thường Kiệt, Quảng Ngãi",
+        "customerType": {
+          "id": 1,
+          "name": "Diamond"
+        }
+      },
+      "facility": {
+        "id": "5",
+        "name": "House Princess 02",
+        "area": "10000",
+        "cost": "4000000",
+        "image": "https://kconceptvn.com/wp-content/uploads/2020/04/hotel-photography-chup-anh-khach-san-resortNovotel-phu-quoc-resort-02.jpg",
+        "maxPeople": "5",
+        "standard": "normal",
+        "description": "Có thêm bếp nướng",
+        "poolArea": "null",
+        "floor": "2",
+        "facilityFree": "null",
+        "rentType": {
+          "id": "3",
+          "name": "day"
+        },
+        "facilityType": {
+          "id": "2",
+          "name": "House"
+        }
+      }
+    }
+  ],
+  "educations": [
+    {
+      "id": "1",
+      "name": "Trung Cấp"
+    },
+    {
+      "id": "2",
+      "name": "Cao Đẳng"
+    },
+    {
+      "id": "3",
+      "name": "Đại Học"
+    },
+    {
+      "id": "4",
+      "name": "Sau Đại Học"
+    }
+  ],
+  "positions": [
+    {
+      "id": "1",
+      "name": "Quản Lý"
+    },
+    {
+      "id": "2",
+      "name": "Nhân Viên"
+    }
+  ],
+  "divisions": [
+    {
+      "id": "1",
+      "name": "Lễ tân"
+    },
+    {
+      "id": "2",
+      "name": "Phục vụ"
+    },
+    {
+      "id": "3",
+      "name": "Chuyên viên"
+    },
+    {
+      "id": "4",
+      "name": "Giám sát"
+    },
+    {
+      "id": "5",
+      "name": "Quản lý"
+    },
+    {
+      "id": "6",
+      "name": "Giám đốc"
+    }
+  ],
+  "employees": [
+    {
+      "id": "1",
+      "name": "Nguyễn Văn An",
+      "dateOfBirth": "1970-11-07",
+      "iDCard": "456231786",
+      "salary": "10000000",
+      "phoneNumber": "0901234121",
+      "email": "annguyen@gmail.com",
+      "address": "295 Nguyễn Tất Thành, Đà Nẵng",
+      "position": {
+        "id": "1",
+        "name": "Quản Lý"
+      },
+      "education": {
+        "id": "3",
+        "name": "Đại Học"
+      },
+      "division": {
+        "id": "1",
+        "name": "Lễ tân"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Lê Văn Bình",
+      "dateOfBirth": "1997-04-09",
+      "iDCard": "654231234",
+      "salary": "7000000",
+      "phoneNumber": "0934212314",
+      "email": "binhlv@gmail.com",
+      "address": "22 Yên Bái, Đà Nẵng",
+      "position": {
+        "id": "1",
+        "name": "Quản Lý"
+      },
+      "education": {
+        "id": "2",
+        "name": "Cao Đẳng"
+      },
+      "division": {
+        "id": "2",
+        "name": "Phục vụ"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Hồ Thị Yến",
+      "dateOfBirth": "1995-12-12",
+      "iDCard": "999231723",
+      "salary": "14000000",
+      "phoneNumber": "0412352315",
+      "email": "thiyen@gmail.com",
+      "address": "K234/11 Điện Biên Phủ, Gia Lai",
+      "position": {
+        "id": "1",
+        "name": "Quản Lý"
+      },
+      "education": {
+        "id": "3",
+        "name": "Đại Học"
+      },
+      "division": {
+        "id": "2",
+        "name": "Phục vụ"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Võ Công Toản",
+      "dateOfBirth": "1980-04-04",
+      "iDCard": "123231365",
+      "salary": "17000000",
+      "phoneNumber": "0374443232",
+      "email": "toan0404@gmail.com",
+      "address": "77 Hoàng Diệu, Quảng Trị",
+      "position": {
+        "id": "1",
+        "name": "Quản Lý"
+      },
+      "education": {
+        "id": "4",
+        "name": "Sau Đại Học"
+      },
+      "division": {
+        "id": "4",
+        "name": "Giám sát"
+      }
+    },
+    {
+      "id": "5",
+      "name": "Nguyễn Bỉnh Phát",
+      "dateOfBirth": "1999-12-09",
+      "iDCard": "454363232",
+      "salary": "6000000",
+      "phoneNumber": "0902341231",
+      "email": "phatphat@gmail.com",
+      "address": "43 Yên Bái, Đà Nẵng",
+      "position": {
+        "id": "2",
+        "name": "Nhân Viên"
+      },
+      "education": {
+        "id": "1",
+        "name": "Trung Cấp"
+      },
+      "division": {
+        "id": "1",
+        "name": "Lễ tân"
+      }
+    },
+    {
+      "id": "6",
+      "name": "Khúc Nguyễn An Nghi",
+      "dateOfBirth": "2000-11-08",
+      "iDCard": "964542311",
+      "salary": "7000000",
+      "phoneNumber": "0978653213",
+      "email": "annghi20@gmail.com",
+      "address": "294 Nguyễn Tất Thành, Đà Nẵng",
+      "position": {
+        "id": "2",
+        "name": "Nhân Viên"
+      },
+      "education": {
+        "id": "2",
+        "name": "Cao Đẳng"
+      },
+      "division": {
+        "id": "3",
+        "name": "Chuyên viên"
+      }
+    },
+    {
+      "id": "7",
+      "name": "Nguyễn Hữu Hà",
+      "dateOfBirth": "1993-01-01",
+      "iDCard": "534323231",
+      "salary": "8000000",
+      "phoneNumber": "0941234553",
+      "email": "nhh0101@gmail.com",
+      "address": "4 Nguyễn Chí Thanh, Huế",
+      "position": {
+        "id": "2",
+        "name": "Nhân Viên"
+      },
+      "education": {
+        "id": "3",
+        "name": "Đại Học"
+      },
+      "division": {
+        "id": "2",
+        "name": "Phục vụ"
+      }
+    },
+    {
+      "id": "8",
+      "name": "Nguyễn Hà Đông",
+      "dateOfBirth": "1989-09-03",
+      "iDCard": "234414123",
+      "salary": "9000000",
+      "phoneNumber": "0642123111",
+      "email": "donghanguyen@gmail.com",
+      "address": "111 Hùng Vương, Hà Nội",
+      "position": {
+        "id": "2",
+        "name": "Nhân Viên"
+      },
+      "education": {
+        "id": "4",
+        "name": "Sau Đại Học"
+      },
+      "division": {
+        "id": "4",
+        "name": "Giám sát"
+      }
+    },
+    {
+      "id": "9",
+      "name": "Tòng Hoang",
+      "dateOfBirth": "1982-09-03",
+      "iDCard": "256781231",
+      "salary": "6000000",
+      "phoneNumber": "0245144444",
+      "email": "hoangtong@gmail.com",
+      "address": "213 Hàm Nghi, Đà Nẵng",
+      "position": {
+        "id": "2",
+        "name": "Nhân Viên"
+      },
+      "education": {
+        "id": "4",
+        "name": "Sau Đại Học"
+      },
+      "division": {
+        "id": "4",
+        "name": "Giám sát"
+      }
+    },
+    {
+      "id": "10",
+      "name": "Nguyễn Công Đạo",
+      "dateOfBirth": "1994-01-08",
+      "iDCard": "755434343",
+      "salary": "8000000",
+      "phoneNumber": "0988767111",
+      "email": "nguyencongdao12@gmail.com",
+      "address": "6 Hoà Khánh, Đồng Nai",
+      "position": {
+        "id": "2",
+        "name": "Nhân Viên"
+      },
+      "education": {
+        "id": "3",
+        "name": "Đại Học"
+      },
+      "division": {
+        "id": "2",
+        "name": "Phục vụ"
+      }
+    }
+  ]
+}
