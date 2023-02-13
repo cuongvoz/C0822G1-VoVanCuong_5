@@ -1,0 +1,10 @@
+.errorForm {
+  color: red;
+  font-weight: bold;
+}
+.borderError {
+  border-color: red;
+}
+.successInput {
+  border-color: limegreen;
+}

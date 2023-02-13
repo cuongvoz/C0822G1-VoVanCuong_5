@@ -82,15 +82,16 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Tên Khách Hàng: </label>
             <div class="col-sm-10">
-              <input type="text" formControlName="name" class="form-control" name="name">
-              <p class="text-danger"></p>
+              <input [class.successInput]="formAdd.controls.name.valid && formAdd.controls.name.dirty" [class.borderError]="formAdd.controls.name.invalid && formAdd.controls.name.dirty" type="text" formControlName="name" class="form-control" name="name">
+              <p class="errorForm" *ngIf="formAdd.controls.name.hasError('pattern') && formAdd.controls.name.dirty">Lỗi tên không đúng định dạng</p>
+              <p class="errorForm" *ngIf="formAdd.controls.name.hasError('required') && formAdd.controls.name.dirty">Tên không được bỏ trống</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Sinh</label>
             <div class="col-sm-10">
-              <input type="date" formControlName="dateOfBirth" class="form-control" name="dateOfBirth">
-
+              <input [class.successInput]="formAdd.controls.dateOfBirth.valid && formAdd.controls.dateOfBirth.dirty" [class.borderError]="formAdd.controls.dateOfBirth.invalid && formAdd.controls.dateOfBirth.touched" type="date" formControlName="dateOfBirth" class="form-control" name="dateOfBirth">
+              <p class="errorForm" *ngIf="formAdd.controls.dateOfBirth.hasError('required') && formAdd.controls.dateOfBirth.touched">Vui lòng nhập ngày sinh</p>
             </div>
           </div>
           <div class="mb-3 row">
@@ -100,42 +101,53 @@
                      > Nam
               <input type="radio" formControlName="gender" style="margin-left: 25px" name="gender"
                      [value]="0"  class="form-check-input" > Nữ
+              <p class="errorForm" *ngIf="formAdd.controls.gender.hasError('required') && formAdd.controls.gender.dirty">Vui lòng chọn giới tính</p>
+
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Số CMND</label>
             <div class="col-sm-10">
-              <input type="number" formControlName="iDCard"  class="form-control" name="iDCard">
-              <p  class="text-danger"></p>
+              <input [class.successInput]="formAdd.controls.iDCard.valid && formAdd.controls.iDCard.dirty" #idCardA (change)="checkIDCard(idCardA.value)" [class.borderError]="formAdd.controls.iDCard.invalid && formAdd.controls.iDCard.dirty" type="number" formControlName="iDCard"  class="form-control" name="iDCard">
+              <p class="errorForm" *ngIf="formAdd.controls.iDCard.hasError('required') && formAdd.controls.iDCard.dirty">Vui lòng nhập số căn cước công dân</p>
+              <p class="errorForm" *ngIf="formAdd.controls.iDCard.hasError('idCardUnique') && formAdd.controls.iDCard.dirty">{{'Số CCCD ' + idCardA.value + ' đã có người sử dụng rồi'}}</p>
+
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Số Điện Thoại </label>
             <div class="col-sm-10">
-              <input formControlName="phoneNumber" type="number" class="form-control"
+              <input [class.successInput]="formAdd.controls.phoneNumber.valid && formAdd.controls.phoneNumber.dirty" #phoneN (change)="checkPhoneNumber(phoneN.value)" [class.borderError]="formAdd.controls.phoneNumber.invalid && formAdd.controls.phoneNumber.dirty" formControlName="phoneNumber" type="number" class="form-control"
                      name="phoneNumber">
-
+              <p class="errorForm" *ngIf="formAdd.controls.phoneNumber.hasError('required') && formAdd.controls.phoneNumber.dirty">Vui lòng nhập số điện thoại</p>
+              <p class="errorForm" *ngIf="formAdd.controls.phoneNumber.hasError('phoneNumberUnique') && formAdd.controls.phoneNumber.dirty">{{'Số điện thoại ' + phoneN.value + ' đã có người sử dụng rồi'}}</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Email </label>
             <div class="col-sm-10">
-              <input type="email" formControlName="email" id="email" class="form-control" name="email">
+              <input type="email" [class.successInput]="formAdd.controls.email.valid && formAdd.controls.email.dirty" [class.borderError]="formAdd.controls.email.invalid && formAdd.controls.email.dirty" #email (change)="checkEmail(email.value)" formControlName="email" id="email" class="form-control" name="email">
+              <p class="errorForm" *ngIf="formAdd.controls.email.hasError('emailUnique') && formAdd.controls.email.dirty">{{'Email ' + email.value + ' đã được sử dụng rồi'}}</p>
+              <p class="errorForm" *ngIf="formAdd.controls.email.hasError('required') && formAdd.controls.email.dirty">Email không được bỏ trống</p>
+              <p class="errorForm" *ngIf="formAdd.controls.email.hasError('email') && formAdd.controls.email.dirty">Email không được bỏ trống</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Địa Chỉ </label>
             <div class="col-sm-10">
-              <input type="text" formControlName="address"  class="form-control" name="address">
+              <input type="text" [class.successInput]="formAdd.controls.address.valid && formAdd.controls.email.dirty" [class.borderError]="formAdd.controls.address.invalid && formAdd.controls.address.dirty" formControlName="address"  class="form-control" name="address">
+              <p class="errorForm" *ngIf="formAdd.controls.address.hasError('required') && formAdd.controls.address.dirty">Vui lòng nhập số điện thoại</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Kiểu Khách</label>
             <div class="col-sm-10">
-              <select  formControlName="customerType" class="form-select" name="customerType">
+              <select [class.successInput]="formAdd.controls.customerType.valid && formAdd.controls.customerType.dirty" [class.borderError]="formAdd.controls.customerType.invalid && formAdd.controls.customerType.touched" formControlName="customerType" class="form-select" name="customerType">
                 <option disabled ngValue="">Chọn kiểu khách</option>
                 <option *ngFor="let x of customerTypes" [ngValue]="x">{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formAdd.controls.customerType.hasError('required') && formAdd.controls.customerType.touched">Vui lòng chọn kiểu khách</p>
+
             </div>
           </div>
           <div class="modal-footer">
@@ -161,13 +173,16 @@
             <label class="col-sm-2 col-form-label">Họ Tên: </label>
             <div class="col-sm-10">
               <input type="hidden" formControlName="id">
-              <input type="text" formControlName="name" class="form-control" name="name">
+              <input [class.successInput]="formEdit.controls.name.valid && formEdit.controls.name.dirty" [class.borderError]="formEdit.controls.name.invalid && formEdit.controls.name.dirty" type="text" formControlName="name" class="form-control" name="name">
+              <p class="errorForm" *ngIf="formEdit.controls.name.hasError('pattern') && formEdit.controls.name.dirty">Lỗi tên không đúng định dạng</p>
+              <p class="errorForm" *ngIf="formEdit.controls.name.hasError('required') && formEdit.controls.name.dirty">Tên không được bỏ trống</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Sinh</label>
             <div class="col-sm-10">
-              <input type="date"  formControlName="dateOfBirth" class="form-control" name="dateOfBirth">
+              <input [class.successInput]="formEdit.controls.dateOfBirth.valid && formEdit.controls.dateOfBirth.dirty" [class.borderError]="formEdit.controls.dateOfBirth.invalid && formEdit.controls.dateOfBirth.touched" type="date" formControlName="dateOfBirth" class="form-control" name="dateOfBirth">
+              <p class="errorForm" *ngIf="formEdit.controls.dateOfBirth.hasError('required') && formEdit.controls.dateOfBirth.touched">Vui lòng nhập ngày sinh</p>
             </div>
           </div>
           <div class="mb-3 row">
@@ -181,38 +196,50 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Số CMND</label>
             <div class="col-sm-10">
-              <input type="number" formControlName="iDCard" class="form-control" name="iDCard">
+              <input [class.successInput]="formEdit.controls.iDCard.valid && formEdit.controls.iDCard.dirty" #idCardB (change)="checkIDCard2(idCardB.value)" [class.borderError]="formEdit.controls.iDCard.invalid && formEdit.controls.iDCard.dirty" type="number" formControlName="iDCard"  class="form-control" name="iDCard">
+              <p class="errorForm" *ngIf="formEdit.controls.iDCard.hasError('required') && formEdit.controls.iDCard.dirty">Vui lòng nhập số căn cước công dân</p>
+              <p class="errorForm" *ngIf="formEdit.controls.iDCard.hasError('idCardUnique') && formEdit.controls.iDCard.dirty">{{'Số CCCD ' + idCardB.value + ' đã có người sử dụng rồi'}}</p>
+
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Số Điện Thoại </label>
             <div class="col-sm-10">
-              <input formControlName="phoneNumber" type="number" class="form-control" name="phoneNumber">
+              <input [class.successInput]="formEdit.controls.phoneNumber.valid && formEdit.controls.phoneNumber.dirty" #phoneZ (change)="checkPhoneNumber2(phoneZ.value)" [class.borderError]="formEdit.controls.phoneNumber.invalid && formEdit.controls.phoneNumber.dirty" formControlName="phoneNumber" type="number" class="form-control"
+                     name="phoneNumber">
+              <p class="errorForm" *ngIf="formEdit.controls.phoneNumber.hasError('required') && formEdit.controls.phoneNumber.dirty">Vui lòng nhập số điện thoại</p>
+              <p class="errorForm" *ngIf="formEdit.controls.phoneNumber.hasError('phoneNumberUnique') && formEdit.controls.phoneNumber.dirty">{{'Số điện thoại ' + phoneZ.value + ' đã có người sử dụng rồi'}}</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Email </label>
             <div class="col-sm-10">
-              <input type="email" formControlName="email" class="form-control" name="email">
+              <input type="email" [class.successInput]="formEdit.controls.email.valid && formEdit.controls.email.dirty" [class.borderError]="formEdit.controls.email.invalid && formEdit.controls.email.dirty" #emailZ (change)="checkEmail2(emailZ.value)" formControlName="email"  class="form-control" name="email">
+              <p class="errorForm" *ngIf="formEdit.controls.email.hasError('emailUnique') && formEdit.controls.email.dirty">{{'Email ' + emailZ.value + ' đã được sử dụng rồi'}}</p>
+              <p class="errorForm" *ngIf="formEdit.controls.email.hasError('required') && formEdit.controls.email.dirty">Email không được bỏ trống</p>
+              <p class="errorForm" *ngIf="formEdit.controls.email.hasError('email') && formEdit.controls.email.dirty">Email không được bỏ trống</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Địa Chỉ </label>
             <div class="col-sm-10">
-              <input type="text" formControlName="address" class="form-control" name="address">
+              <input type="text" [class.successInput]="formEdit.controls.address.valid && formEdit.controls.email.dirty" [class.borderError]="formEdit.controls.address.invalid && formEdit.controls.address.dirty" formControlName="address"  class="form-control" name="address">
+              <p class="errorForm" *ngIf="formEdit.controls.address.hasError('required') && formAdd.controls.address.dirty">Vui lòng nhập số điện thoại</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Kiểu Khách</label>
             <div class="col-sm-10">
-              <select formControlName="customerType" class="form-select" name="customerType" [compareWith]="compareFN">
+              <select [class.successInput]="formEdit.controls.customerType.valid && formEdit.controls.customerType.dirty"  formControlName="customerType" class="form-select" name="customerType" [compareWith]="compareFN">
                 <option *ngFor="let x of customerTypes" [ngValue]="x">{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formEdit.controls.customerType.hasError('required') && formAdd.controls.customerType.touched">Vui lòng chọn kiểu khách</p>
+
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Xác Nhận</button>
+            <button type="submit" [class.btn-outline-danger]="formEdit.invalid" data-bs-dismiss="modal" [disabled]="formEdit.invalid" class="btn btn-primary">Xác Nhận</button>
           </div>
         </form>
       </div>

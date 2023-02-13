@@ -57,84 +57,103 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Loại Dịch Vụ</label>
             <div class="col-sm-10">
-              <select class="form-control"  formControlName="facilityType" (change)="checkValue()" >
-                <option [value]="null" [selected]="true" [disabled]="true" >Chọn Loại Dịch Vụ</option>
+              <select [class.successInput]="formAdd.controls.facilityType.valid && formAdd.controls.facilityType.dirty" [class.borderError]="formAdd.controls.facilityType.invalid && formAdd.controls.facilityType.touched" class="form-control"  formControlName="facilityType" (change)="checkValue(de)" >
+                <option [value]="null"  [selected]="true" [disabled]="true" >Chọn Loại Dịch Vụ</option>
                 <option *ngFor="let x of facilityTypeList" class="form-control" [ngValue]="x"  >{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formAdd.controls.facilityType.hasError('required') && formAdd.controls.facilityType.touched">Vui lòng chọn loại dịch vụ</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Tên Dịch Vụ</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="name">
+              <input [class.successInput]="formAdd.controls.name.valid && formAdd.controls.name.dirty" [class.borderError]="formAdd.controls.name.invalid && formAdd.controls.name.dirty" type="text" class="form-control" formControlName="name">
+              <p class="errorForm" *ngIf="formAdd.controls.name.hasError('required') && formAdd.controls.name.dirty">Vui lòng nhập tên dịch vụ</p>
+
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Diện Tích</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" formControlName="area">
+              <input [class.successInput]="formAdd.controls.area.valid && formAdd.controls.area.dirty" [class.borderError]="formAdd.controls.area.invalid && formAdd.controls.area.dirty" type="number" class="form-control" formControlName="area">
+              <p class="errorForm" *ngIf="formAdd.controls.area.hasError('required') && formAdd.controls.area.dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Chi Phí Thuê</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" formControlName="cost">
+              <input [class.successInput]="formAdd.controls.cost.valid && formAdd.controls.cost.dirty" [class.borderError]="formAdd.controls.cost.invalid && formAdd.controls.cost.dirty"  type="number" class="form-control" formControlName="cost">
+              <p class="errorForm" *ngIf="formAdd.controls.cost.hasError('required') && formAdd.controls.cost.dirty">Vui lòng nhập chi phí thuê</p>
+
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Số Người Tối Đa</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" formControlName="maxPeople">
+              <input [class.successInput]="formAdd.controls.maxPeople.valid && formAdd.controls.maxPeople.dirty" [class.borderError]="formAdd.controls.maxPeople.invalid && formAdd.controls.maxPeople.dirty" type="number" class="form-control" formControlName="maxPeople">
+              <p class="errorForm" *ngIf="formAdd.controls.maxPeople.hasError('required') && formAdd.controls.maxPeople.dirty">Vui lòng nhập số người tối đa</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Kiểu Thuê</label>
             <div class="col-sm-10">
-              <select class="form-control" formControlName="rentType">
+              <select [class.successInput]="formAdd.controls.rentType.valid && formAdd.controls.rentType.dirty" [class.borderError]="formAdd.controls.rentType.invalid && formAdd.controls.rentType.touched" class="form-control" formControlName="rentType">
                 <option [value]="null" [selected]="true" [disabled]="true" >Chọn Kiểu Thuê</option>
                 <option *ngFor="let x of rentTypeList" class="form-control" [ngValue]="x" >{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formAdd.controls.rentType.hasError('required') && formAdd.controls.rentType.touched">Chọn kiểu thuê</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Hình Ảnh</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="image">
+              <input [class.successInput]="formAdd.controls.image.valid && formAdd.controls.image.dirty" [class.imageError]="formAdd.controls.image.invalid && formAdd.controls.image.touched" type="text" class="form-control" formControlName="image">
+              <p class="urlImage" *ngIf="formAdd.controls.image.hasError('required') && formAdd.controls.image.touched">Hãy nhập link url để cho có hỉnh ảnh đẹp hơn :D</p>
+
             </div>
           </div>
           <div *ngIf="idAdd == 1 || idAdd == 2" class="mb-3 row" id="standardAdd">
             <label class="col-sm-2 col-form-label">Tiêu Chuẩn Phòng</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="standard">
+              <input #stanDard (change)="checkStandard(stanDard.value)" [class.successInput]="formAdd.controls.standard.valid && formAdd.controls.standard.dirty" [class.borderError]="formAdd.controls.standard.invalid && formAdd.controls.standard.dirty" type="text" class="form-control"  formControlName="standard">
+              <p class="errorForm" *ngIf="formAdd.controls.standard.hasError('nullStandard') && formAdd.controls.standard.dirty">{{standardError}}</p>
+
             </div>
           </div>
           <div *ngIf="idAdd == 1 || idAdd == 2" class="mb-3 row" id="descriptionAdd">
             <label class="col-sm-2 col-form-label">Mô Tả Khác</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="description">
+              <input #decription (change)="checkDescription(decription.value)" [class.successInput]="formAdd.controls.description.valid && formAdd.controls.description.dirty" [class.borderError]="formAdd.controls.description.invalid && formAdd.controls.description.dirty" type="text" class="form-control" formControlName="description">
+              <p class="errorForm" *ngIf="formAdd.controls.description.hasError('nullDescription') && formAdd.controls.description.dirty">{{descriptionError}}</p>
+
             </div>
           </div>
           <div *ngIf="idAdd == 1 " class="mb-3 row" id="poolAreaAdd">
             <label class="col-sm-2 col-form-label">Diện Tích Hồ Bơi</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" formControlName="poolArea">
+              <input #pool (change)="checkPool(pool.value)" [class.successInput]="formAdd.controls.poolArea.valid && formAdd.controls.poolArea.dirty" [class.borderError]="formAdd.controls.poolArea.invalid && formAdd.controls.poolArea.dirty" type="number" class="form-control" formControlName="poolArea">
+              <p class="errorForm" *ngIf="formAdd.controls.poolArea.hasError('nullPoolArea') && formAdd.controls.poolArea.dirty">{{messagePoolError}}</p>
+
             </div>
           </div>
           <div *ngIf="idAdd == 1 || idAdd == 2" class="mb-3 row" id="numberOfFloorAdd">
             <label class="col-sm-2 col-form-label">Số Tầng</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" formControlName="floor">
+              <input (change)="checkFloor(floor.value)" #floor [class.successInput]="formAdd.controls.floor.valid && formAdd.controls.floor.dirty" [class.borderError]="formAdd.controls.floor.invalid && formAdd.controls.floor.dirty" type="number" class="form-control" formControlName="floor">
+              <p class="errorForm" *ngIf="formAdd.controls.floor.hasError('nullFloor') && formAdd.controls.floor.dirty">{{floorError}}</p>
             </div>
           </div>
           <div *ngIf="idAdd == 3" class="mb-3 row " id="addFreeService">
             <label class="col-sm-2 col-form-label">Dịch Vụ Miễn Phí</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="facilityFree">
+              <input (change)="checkFreeFacility(free.value)" #free [class.successInput]="formAdd.controls.facilityFree.valid && formAdd.controls.facilityFree.dirty" [class.borderError]="formAdd.controls.facilityFree.invalid && formAdd.controls.facilityFree.dirty" type="text" class="form-control" formControlName="facilityFree">
+              <p class="errorForm" *ngIf="formAdd.controls.facilityFree.hasError('nullFreeFacility') && formAdd.controls.facilityFree.dirty">Hãy nhập dịch vụ miễn phí đi kèm cho Room</p>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary clearError" data-bs-dismiss="modal">Hủy</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Xác Nhận</button>
+            <button type="submit" [disabled]="formAdd.invalid" class="btn btn-primary" data-bs-dismiss="modal">Xác Nhận</button>
           </div>
         </form>
       </div>

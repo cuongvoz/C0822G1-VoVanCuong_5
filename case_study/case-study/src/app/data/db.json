@@ -139,6 +139,62 @@
         "id": 2,
         "name": "Platinium"
       }
+    },
+    {
+      "id": "sgy_vl1",
+      "name": "cxzczx",
+      "dateOfBirth": "2023-02-05",
+      "gender": 1,
+      "iDCard": 123456789,
+      "phoneNumber": 321321321,
+      "email": "thihao072@gmail.com",
+      "address": "K453/12 Lê Lợi, Đà Nẵng",
+      "customerType": {
+        "id": 4,
+        "name": "Silver"
+      }
+    },
+    {
+      "id": "j9Yiv2c",
+      "name": "cuong",
+      "dateOfBirth": "2023-02-26",
+      "gender": 1,
+      "iDCard": 321312321,
+      "phoneNumber": 312312321321,
+      "email": "thihao0z7@gmail.com",
+      "address": "K234/11 Điện Biên Phủ, Gia Lai",
+      "customerType": {
+        "id": 2,
+        "name": "Platinium"
+      }
+    },
+    {
+      "id": "LATXr5i",
+      "name": "cuong",
+      "dateOfBirth": "2023-02-19",
+      "gender": 0,
+      "iDCard": 3213213,
+      "phoneNumber": 321321321,
+      "email": "thihao0733@gmail.com",
+      "address": "295 Nguyễn Tất Thành, Đà Nẵng",
+      "customerType": {
+        "id": 2,
+        "name": "Platinium"
+      }
+    },
+    {
+      "id": "z8LxYmU",
+      "name": "test thu",
+      "dateOfBirth": "2023-02-16",
+      "gender": 1,
+      "iDCard": 321321321,
+      "phoneNumber": 321321312,
+      "email": "thihao07@gmail.com2",
+      "address": "K453/12 Lê Lợi, Đà Nẵng",
+      "customerType": {
+        "id": 5,
+        "name": "Member"
+      }
     }
   ],
   "customerTypes": [
@@ -263,6 +319,27 @@
       "rentType": {
         "id": "4",
         "name": "hour"
+      },
+      "facilityType": {
+        "id": "3",
+        "name": "Room"
+      }
+    },
+    {
+      "id": "4Ne0669",
+      "name": "sadsadas",
+      "image": "https://www.thespruce.com/thmb/iMt63n8NGCojUETr6-T8oj-5-ns=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/PAinteriors-7-cafe9c2bd6be4823b9345e591e4f367f.jpg",
+      "area": 312321,
+      "cost": 32423,
+      "maxPeople": 3,
+      "standard": "",
+      "description": null,
+      "poolArea": null,
+      "floor": null,
+      "facilityFree": "3",
+      "rentType": {
+        "id": "1",
+        "name": "year"
       },
       "facilityType": {
         "id": "3",
