@@ -4,7 +4,7 @@ import {ContractService} from "../service/contract/contract.service";
 import {Facility} from "../model/facility";
 import {Employee} from "../model/employee";
 import {Customer} from "../model/customer";
-import {FormControl, FormGroup} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-contract',
@@ -18,21 +18,21 @@ export class ContractComponent implements OnInit {
   customers: Customer[];
   formAdd = new FormGroup({
     id: new FormControl(),
-    startDay: new FormControl(),
-    endDay: new FormControl(),
-    cost: new FormControl(),
-    employee: new FormControl(),
-    customer: new FormControl(),
-    facility: new FormControl(),
+    startDay: new FormControl('',[Validators.required,this.todayValid]),
+    endDay: new FormControl('',[Validators.required]),
+    cost: new FormControl('',[Validators.required]),
+    employee: new FormControl(null,[Validators.required]),
+    customer: new FormControl(null,[Validators.required]),
+    facility: new FormControl(null,[Validators.required]),
   });
   formEdit = new FormGroup({
     id: new FormControl(),
-    startDay: new FormControl(),
-    endDay: new FormControl(),
-    cost: new FormControl(),
-    employee: new FormControl(),
-    customer: new FormControl(),
-    facility: new FormControl(),
+    startDay: new FormControl('',[Validators.required]),
+    endDay: new FormControl('',[Validators.required]),
+    cost: new FormControl('',[Validators.required]),
+    employee: new FormControl(null,[Validators.required]),
+    customer: new FormControl(null,[Validators.required]),
+    facility: new FormControl(null,[Validators.required])
   });
   constructor(private contractService: ContractService) {
     this.contractService.getAllContract().subscribe(next => {
@@ -48,7 +48,16 @@ export class ContractComponent implements OnInit {
       this.facilitys = next;
     })
   }
-
+  todayValid(today: AbstractControl) {
+    return (new Date(today.value) <= new Date(Date.now())) ? {'todayValid': true} : null;
+  }
+  endDayValid(end: string) {
+    let start = this.formAdd.controls.startDay.value;
+    // @ts-ignore
+    if (new Date(start) >= new Date(end)) {
+      this.formAdd.controls.endDay.setErrors({'endInvalid':true})
+    }
+  }
   ngOnInit(): void {
     this.contractService.getAllContract().subscribe(next => {
       this.contracts = next;
@@ -76,5 +85,18 @@ export class ContractComponent implements OnInit {
         this.ngOnInit();
       }
     )
+  }
+
+  todayValid2(today: string) {
+    // @ts-ignore
+    if (new Date(today) <= Date.now()) {
+      this.formEdit.controls.startDay.setErrors({'todayValid': true});
+    }
+  }
+  endValid2(end: string) {
+    // @ts-ignore
+    if (new Date(end) <= new Date(this.formEdit.controls.startDay.value)) {
+      this.formEdit.controls.endDay.setErrors({'endValid': true});
+    }
   }
 }

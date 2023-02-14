@@ -57,7 +57,7 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Loại Dịch Vụ</label>
             <div class="col-sm-10">
-              <select [class.successInput]="formAdd.controls.facilityType.valid && formAdd.controls.facilityType.dirty" [class.borderError]="formAdd.controls.facilityType.invalid && formAdd.controls.facilityType.touched" class="form-control"  formControlName="facilityType" (change)="checkValue(de)" >
+              <select [class.successInput]="formAdd.controls.facilityType.valid && formAdd.controls.facilityType.dirty" [class.borderError]="formAdd.controls.facilityType.invalid && formAdd.controls.facilityType.touched" class="form-control"  formControlName="facilityType" (change)="checkValue()" >
                 <option [value]="null"  [selected]="true" [disabled]="true" >Chọn Loại Dịch Vụ</option>
                 <option *ngFor="let x of facilityTypeList" class="form-control" [ngValue]="x"  >{{x.name}}</option>
               </select>
@@ -144,7 +144,7 @@
               <p class="errorForm" *ngIf="formAdd.controls.floor.hasError('nullFloor') && formAdd.controls.floor.dirty">{{floorError}}</p>
             </div>
           </div>
-          <div *ngIf="idAdd == 3" class="mb-3 row " id="addFreeService">
+          <div  class="mb-3 row " id="addFreeService">
             <label class="col-sm-2 col-form-label">Dịch Vụ Miễn Phí</label>
             <div class="col-sm-10">
               <input (change)="checkFreeFacility(free.value)" #free [class.successInput]="formAdd.controls.facilityFree.valid && formAdd.controls.facilityFree.dirty" [class.borderError]="formAdd.controls.facilityFree.invalid && formAdd.controls.facilityFree.dirty" type="text" class="form-control" formControlName="facilityFree">

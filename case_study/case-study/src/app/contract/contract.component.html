@@ -142,19 +142,26 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Bắt Đầu</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" formControlName="startDay">
+              <input type="date" [class.successInput]="formAdd.controls.startDay.valid && formAdd.controls.startDay.dirty" [class.borderError]="formAdd.controls.startDay.invalid && formAdd.controls.startDay.touched" class="form-control" formControlName="startDay">
+              <p class="errorForm" *ngIf="formAdd.controls.startDay.hasError('required') && formAdd.controls.startDay.touched">Vui lòng nhập ngày bắt đầu</p>
+              <p class="errorForm" *ngIf="formAdd.controls.startDay.hasError('todayValid') && formAdd.controls.startDay.touched">Ngày bắt đầu phải lớn hơn ngày hôm nay</p>
+
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Kết Thúc</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" formControlName="endDay">
+              <input #end (change)="endDayValid(end.value)" [class.successInput]="formAdd.controls.endDay.valid && formAdd.controls.endDay.dirty" [class.borderError]="formAdd.controls.endDay.invalid && formAdd.controls.endDay.touched" type="date" class="form-control" formControlName="endDay">
+              <p class="errorForm" *ngIf="formAdd.controls.endDay.hasError('required') && formAdd.controls.endDay.touched">Vui lòng nhập ngày kết thúc</p>
+              <p class="errorForm" *ngIf="formAdd.controls.endDay.hasError('endInvalid') && formAdd.controls.endDay.touched">Ngày kết thúc phải lớn hơn ngày bắt đầu </p>
+
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Tiền Gửi</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" formControlName="cost">
+              <input type="number" class="form-control" formControlName="cost" [class.successInput]="formAdd.controls.cost.valid && formAdd.controls.cost.dirty" [class.borderError]="formAdd.controls.cost.invalid && formAdd.controls.cost.dirty">
+              <p class="errorForm" *ngIf="formAdd.controls.cost.hasError('required') && formAdd.controls.cost.dirty">Vui lòng nhập chi phí thuê</p>
             </div>
           </div>
           <div class="mb-3 row">
@@ -166,33 +173,36 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Khách Hàng</label>
             <div class="col-sm-10">
-              <select class="form-control" formControlName="customer">
+              <select [class.successInput]="formAdd.controls.customer.valid && formAdd.controls.customer.dirty" [class.borderError]="formAdd.controls.customer.invalid && formAdd.controls.customer.touched" class="form-control" formControlName="customer">
                 <option [value]="null" [selected]="true" [disabled]="true" >Chọn khách hàng</option>
                 <option *ngFor="let x of customers" [ngValue]="x" >{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formAdd.controls.customer.hasError('required') && formAdd.controls.customer.touched">Vui lòng chọn khách hàng</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Nhân Viên</label>
             <div class="col-sm-10">
-              <select class="form-control" formControlName="employee">
+              <select [class.successInput]="formAdd.controls.employee.valid && formAdd.controls.employee.dirty" [class.borderError]="formAdd.controls.employee.invalid && formAdd.controls.employee.touched" class="form-control" formControlName="employee">
                 <option [value]="null" [selected]="true" [disabled]="true" >Chọn nhân viên</option>
                 <option *ngFor="let x of employees" [ngValue]="x" >{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formAdd.controls.employee.hasError('required') && formAdd.controls.employee.touched">Vui lòng chọn nhân viên</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Dịch Vụ</label>
             <div class="col-sm-10">
-              <select class="form-control" formControlName="facility">
+              <select class="form-control" formControlName="facility" [class.successInput]="formAdd.controls.facility.valid && formAdd.controls.facility.dirty" [class.borderError]="formAdd.controls.facility.invalid && formAdd.controls.facility.touched">
                 <option [value]="null" [selected]="true" [disabled]="true" >Chọn dịch vụ</option>
                 <option *ngFor="let x of facilitys" [ngValue]="x" >{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formAdd.controls.facility.hasError('required') && formAdd.controls.facility.touched">Vui lòng chọn dịch vụ</p>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Xác Nhận</button>
+            <button type="submit" data-bs-dismiss="modal" [class.btn-outline-danger]="formAdd.invalid" [disabled]="formAdd.invalid" class="btn btn-primary">Xác Nhận</button>
           </div>
         </form>
       </div>
@@ -212,20 +222,25 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Bắt Đầu</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" formControlName="startDay">
+              <input #today (change)="todayValid2(today.value)" [class.successInput]="formEdit.controls.startDay.valid && formEdit.controls.startDay.dirty" [class.borderError]="formEdit.controls.startDay.invalid && formEdit.controls.startDay.touched" type="date" class="form-control" formControlName="startDay">
+              <p class="errorForm" *ngIf="formEdit.controls.startDay.hasError('required') && formEdit.controls.startDay.touched">Vui lòng nhập ngày bắt đầu</p>
+              <p class="errorForm" *ngIf="formEdit.controls.startDay.hasError('todayValid') && formEdit.controls.startDay.touched">Ngày bắt đầu phải lớn hơn ngày hôm nay</p>
               <input type="hidden" class="form-control" formControlName="id">
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Ngày Kết Thúc</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" formControlName="endDay">
+              <input #endDay (change)="endValid2(endDay.value)" [class.successInput]="formEdit.controls.endDay.valid && formEdit.controls.endDay.dirty" [class.borderError]="formEdit.controls.endDay.invalid && formEdit.controls.endDay.touched" type="date" class="form-control" formControlName="endDay">
+              <p class="errorForm" *ngIf="formEdit.controls.endDay.hasError('required') && formEdit.controls.endDay.touched">Vui lòng nhập ngày kết thúc</p>
+              <p class="errorForm" *ngIf="formEdit.controls.endDay.hasError('endValid') && formEdit.controls.endDay.touched">Ngày kết thúc phải lớn hơn ngày bắt đầu </p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Tiền Gửi</label>
             <div class="col-sm-10">
-              <input type="number" id="depositEdit" class="form-control" formControlName="cost">
+              <input [class.successInput]="formEdit.controls.cost.valid && formEdit.controls.cost.dirty" [class.borderError]="formEdit.controls.cost.invalid && formEdit.controls.cost.dirty" type="number" id="depositEdit" class="form-control" formControlName="cost">
+              <p class="errorForm" *ngIf="formEdit.controls.cost.hasError('required') && formEdit.controls.cost.dirty">Vui lòng nhập tiền gửi</p>
             </div>
           </div>
           <div class="mb-3 row">
@@ -237,28 +252,32 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Khách Hàng</label>
             <div class="col-sm-10">
-              <select class="form-control" formControlName="customer" [compareWith]="compareFN">
+              <select [class.successInput]="formEdit.controls.customer.valid && formEdit.controls.customer.dirty" [class.borderError]="formEdit.controls.customer.invalid && formEdit.controls.customer.touched" class="form-control" formControlName="customer" [compareWith]="compareFN">
                 <option [value]="null" [selected]="true" [disabled]="true" >Chọn khách hàng</option>
                 <option *ngFor="let x of customers" [ngValue]="x" >{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formEdit.controls.customer.hasError('required') && formEdit.controls.customer.touched">Vui lòng chọn khách hàng</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Nhân Viên</label>
             <div class="col-sm-10">
-              <select class="form-control" formControlName="employee" [compareWith]="compareFN">
+              <select [class.successInput]="formEdit.controls.employee.valid && formEdit.controls.employee.dirty" [class.borderError]="formEdit.controls.employee.invalid && formEdit.controls.employee.touched" class="form-control" formControlName="employee" [compareWith]="compareFN">
                 <option [value]="null" [selected]="true" [disabled]="true" >Chọn nhân viên</option>
                 <option *ngFor="let x of employees" [ngValue]="x" >{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formEdit.controls.employee.hasError('required') && formEdit.controls.employee.touched">Vui lòng chọn nhân viên</p>
+
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Dịch Vụ</label>
             <div class="col-sm-10">
-              <select class="form-control" formControlName="facility" [compareWith]="compareFN">
+              <select [class.successInput]="formEdit.controls.facility.valid && formEdit.controls.facility.dirty" [class.borderError]="formEdit.controls.facility.invalid && formEdit.controls.facility.touched" class="form-control" formControlName="facility" [compareWith]="compareFN">
                 <option [value]="null" [selected]="true" [disabled]="true" >Chọn dịch vụ</option>
                 <option *ngFor="let x of facilitys" [ngValue]="x" >{{x.name}}</option>
               </select>
+              <p class="errorForm" *ngIf="formEdit.controls.facility.hasError('required') && formEdit.controls.facility.touched">Vui lòng chọn dịch vụ</p>
             </div>
           </div>
 
@@ -272,7 +291,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Xác Nhận</button>
+            <button type="submit" data-bs-dismiss="modal" [disabled]="formEdit.invalid" class="btn btn-primary">Xác Nhận</button>
           </div>
         </form>
       </div>
