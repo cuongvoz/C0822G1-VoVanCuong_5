@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,13 +55,15 @@ public class RestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("")
-    public ResponseEntity<?> Create(@RequestBody BenhAnDTO benhAnDTO) {
+    public ResponseEntity<?> Create(@Validated @RequestBody BenhAnDTO benhAnDTO, BindingResult bindingResult) {
         System.out.println(benhAnDTO);
-//        String startDay,String endDay,String reason,String method,int doctorID,String id,String name,String idz
-        this.iPatientService.create( benhAnDTO.getPatientName(), benhAnDTO.getPatientID());
-        this.iBenhAnService.addBenhAn(benhAnDTO.getId(),benhAnDTO.getStartDay(),benhAnDTO.getEndDay(),benhAnDTO.getReason(),benhAnDTO.getMethod(),benhAnDTO.getDoctor().getId(),benhAnDTO.getPatientID());
-
-        return new ResponseEntity<>(HttpStatus.OK);
+   if (bindingResult.hasErrors()) {
+       return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.BAD_REQUEST);
+   } else {
+       this.iPatientService.create( benhAnDTO.getPatientName(), benhAnDTO.getPatientID());
+       this.iBenhAnService.addBenhAn(benhAnDTO.getId(),benhAnDTO.getStartDay(),benhAnDTO.getEndDay(),benhAnDTO.getReason(),benhAnDTO.getMethod(),benhAnDTO.getDoctor().getId(),benhAnDTO.getPatientID());
+           return new ResponseEntity<>(HttpStatus.OK);
+   }
     }
     @GetMapping("/search/{name}")
     public ResponseEntity<List<BenhAn>> search(@PathVariable("name") String name) {

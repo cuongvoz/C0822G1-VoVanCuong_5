@@ -31,11 +31,11 @@
   </tr>
   </tbody>
 </table>
-<!--<div style="width: 100%" class="justify-content-center">-->
-  <button   (click)="changePage(benhAns['number'] - 1)" class="btn btn-outline-info">Previous</button>
-  <span  class="btn btn-outline-info ">{{benhAns['number'] + 1}}</span>
-  <button  *ngIf="benhAns['hasNext']" (click)="changePage(benhAns['number'] + 1)" class="btn btn-outline-info">Next</button>
-<!--</div>-->
+
+  <button style="margin-left: 540px;"  (click)="changePage(benhAns['number'] - 1)" class="btn btn-outline-info ">Previous</button>
+  <span style="margin-left: 10px;" class="btn btn-outline-info ">{{benhAns['number'] + 1}}</span>
+  <button  style="margin-left: 10px;" (click)="changePage(benhAns['number'] + 1)" class="btn btn-outline-info ">Next</button>
+
 <div class="modal" tabindex="-1" id="editmodal">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
@@ -159,16 +159,15 @@
             <label class="col-sm-2 col-form-label">Mã bệnh nhân</label>
             <div class="col-sm-10">
               <input type="text" formControlName="patientID" class="form-control" >
-              <p *ngIf="formAdd.controls.patientID.hasError('required') && formAdd.controls.patientID.dirty" style="color: red">Mã bệnh nhân không được bỏ trống</p>
-              <p *ngIf="formAdd.controls.patientID.hasError('pattern') && formAdd.controls.patientID.dirty" style="color: red"> Mã bệnh nhân không hợp lệ VD: BN-321</p>
+              <p style="color: red">{{eror.patientID}}</p>
             </div>
           </div>
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Tên bệnh nhân</label>
             <div class="col-sm-10">
               <input type="text" formControlName="patientName" class="form-control" >
-              <p *ngIf="formAdd.controls.patientName.hasError('required') && formAdd.controls.patientName.dirty" style="color: red">Tên bệnh nhân không được bỏ trống</p>
               <p *ngIf="formAdd.controls.patientName.hasError('pattern') && formAdd.controls.patientName.dirty" style="color: red">Tên bệnh nhân không chứa kí tự số</p>
+              <p style="color: red">{{eror.patientName}}</p>
             </div>
           </div>
           <div class="mb-3 row">
@@ -214,8 +213,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="submit" [disabled]="formAdd.invalid" class="btn btn-primary" data-bs-dismiss="modal">Xác Nhận</button>
+            <button type="button" id="hideModal" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" [disabled]="formAdd.invalid" class="btn btn-primary">Xác Nhận</button>
           </div>
         </form>
       </div>

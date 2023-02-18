@@ -4,6 +4,8 @@ import {BenhAn} from "../model/benh-an";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Doctor} from "../model/doctor";
 import {ActivatedRoute} from "@angular/router";
+import {ErrorValidate} from "../model/error-validate";
+import {$} from "protractor";
 
 @Component({
   selector: 'app-list',
@@ -14,12 +16,17 @@ export class ListComponent implements OnInit {
  benhAns: BenhAn[];
  doctors: Doctor[];
  benhAn: BenhAn;
+ check: boolean;
+ eror: ErrorValidate ={
+   patientID: '',
+   patientName: ''
+ }
  idDelete: string;
   formAdd = new FormGroup({
     id: new FormControl('',[Validators.required,Validators.pattern('BA-\\d{3}')]),
-    patientID: new FormControl('',[Validators.required,Validators.pattern('BN-\\d{3}')]),
+    patientID: new FormControl(''),
     patient: new FormControl(null),
-    patientName: new FormControl('',[Validators.required,Validators.pattern('^[\\D]+$')]),
+    patientName: new FormControl(''),
     startDay: new FormControl('',[Validators.required]),
     endDay: new FormControl('',[Validators.required]),
     reason: new FormControl('',[Validators.required]),
@@ -74,9 +81,21 @@ export class ListComponent implements OnInit {
     })
   }
   create() {
+    this.eror.patientName ='';
+    this.eror.patientID ='';
     this.benhAnService.createBenhAn(this.formAdd.value).subscribe(next => {
+      document.getElementById('hideModal').click()
       this.formAdd.reset();
       this.getAll();
+
+    } ,error => {
+      for (let i = 0; i < error.error.length; i++) {
+        if( error.error[i].defaultMessage.charAt(0) == 1) {
+          this.eror.patientID = error.error[i].defaultMessage.substr(1);
+        } else if (error.error[i].defaultMessage.charAt(0) == 2) {
+          this.eror.patientName = error.error[i].defaultMessage.substr(1);
+        }
+      }
     });
   }
   getAll(){

@@ -1,8 +1,13 @@
 package com.codegym.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 public class BenhAnDTO {
     private String id;
+    @NotBlank(message = "1 Vui lòng nhập mã bệnh nhân")
     private String patientID;
+    @NotBlank(message = "2 Vui lòng nhập tên bệnh nhân")
     private String patientName;
     private String startDay;
     private String endDay;

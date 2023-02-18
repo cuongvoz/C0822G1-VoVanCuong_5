@@ -10,11 +10,11 @@ import {Doctor} from "../model/doctor";
 export class BenhAnService {
 
   constructor(private httpClient: HttpClient) { }
-  getAll():Observable<BenhAn[]> {
-    return this.httpClient.get<BenhAn[]>('http://localhost:8080/benhAns');
+  getAll():Observable<any[]> {
+    return this.httpClient.get<any[]>('http://localhost:8080/benhAns');
   }
-  changePage(page: number):Observable<BenhAn[]> {
-    return this.httpClient.get<BenhAn[]>('http://localhost:8080/benhAns?page=' + page);
+  changePage(page: number):Observable<any[]> {
+    return this.httpClient.get<any[]>('http://localhost:8080/benhAns?page=' + page);
   }
 
   getAllDoctor():Observable<Doctor[]> {
