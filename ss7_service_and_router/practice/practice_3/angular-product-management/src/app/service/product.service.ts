@@ -13,6 +13,9 @@ export class ProductService {
   getAll(): Observable<Product[]> {
     return this.httpClient.get<Product[]>('http://localhost:3000/product');
   }
+  sortList(oder: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>('http://localhost:3000/product?_sort=price&_order=' + oder);
+  }
   saveProduct(product: any) {
     return this.httpClient.post('http://localhost:3000/product/', product);
   }

@@ -66,6 +66,9 @@ export class ProductListComponent implements OnInit {
           }
         );
       }
+
+
+
     });
     this.categoryService.getAll().subscribe(next => {
       this.categorys = next;

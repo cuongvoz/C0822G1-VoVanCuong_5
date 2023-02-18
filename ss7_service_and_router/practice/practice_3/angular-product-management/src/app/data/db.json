@@ -131,6 +131,17 @@
         "id": 3,
         "name": "Sam Sung"
       }
+    },
+    {
+      "id": 18,
+      "name": "IPhone 6s",
+      "price": 2000,
+      "description": "Máy đời nhà tống",
+      "img": "https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/i/p/iphone-6s-plus-rose-gold.jpg",
+      "category": {
+        "name": "Apple",
+        "id": 1
+      }
     }
   ],
   "categorys": [

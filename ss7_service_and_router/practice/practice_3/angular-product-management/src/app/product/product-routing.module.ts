@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: 'search/:category',
     component: ProductListComponent
+  },
+  {
+    path: 'product/sort/:oder',
+    component: ProductListComponent
   }
 ];
 

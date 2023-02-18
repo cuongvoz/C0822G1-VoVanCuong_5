@@ -1,0 +1,224 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>Mã Bệnh Án</th>
+    <th>Mã Bệnh Nhân</th>
+    <th>Tên Bệnh Nhân</th>
+    <th>Ngày Nhập Viện</th>
+    <th>Ngày Ra Viện</th>
+    <th>Lý Do Nhập Viện</th>
+    <th>Phương Pháp Điều Trị</th>
+    <th>Bác Sĩ Điều Trị</th>
+    <th><button class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#addmodal">Thêm mới</button></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let x of benhAns['content']; index as i">
+    <td>{{i+1}}</td>
+    <td>{{x.id}}</td>
+    <td>{{x.patient.id}}</td>
+    <td>{{x.patient.name}}</td>
+    <td>{{x.startDay}}</td>
+    <td>{{x.endDay}}</td>
+    <td>{{x.reason}}</td>
+    <td>{{x.method}}</td>
+    <td>{{x.doctor.name}}</td>
+    <td>
+      <button (click)="checkUpdate(x)" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editmodal">Edit</button>
+      <button (click)="checkDelete(x.id)" data-bs-toggle="modal" data-bs-target="#deletemodal" class="btn btn-outline-danger">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<!--<div style="width: 100%" class="justify-content-center">-->
+  <button   (click)="changePage(benhAns['number'] - 1)" class="btn btn-outline-info">Previous</button>
+  <span  class="btn btn-outline-info ">{{benhAns['number'] + 1}}</span>
+  <button  *ngIf="benhAns['hasNext']" (click)="changePage(benhAns['number'] + 1)" class="btn btn-outline-info">Next</button>
+<!--</div>-->
+<div class="modal" tabindex="-1" id="editmodal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sửa thông tin bệnh án <i class="fa-sharp fa-solid fa-user"></i></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEdit" (ngSubmit)="update()">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Mã Bệnh Án</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="id" class="form-control" name="id" readonly>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Mã bệnh nhân</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="patientID" class="form-control" readonly>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tên bệnh nhân</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="patientName" class="form-control" >
+              <p *ngIf="formEdit.controls.patientName.hasError('required')" style="color: red">Tên bệnh nhân không được bỏ trống</p>
+              <p *ngIf="formEdit.controls.patientName.hasError('pattern')" style="color: red">Tên bệnh nhân không chứa kí tự số</p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ngày Nhập Viện</label>
+            <div class="col-sm-10">
+              <input type="date" #start (change)="checkStart(start.value)" formControlName="startDay" class="form-control" >
+              <p *ngIf="formEdit.controls.startDay.hasError('required')" style="color: red">Ngày nhập viện không được bỏ trống</p>
+              <p *ngIf="formEdit.controls.startDay.hasError('startInvalid')" style="color: red">Ngày nhập phải trước ngày kết thúc</p>
+
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ngày Ra Viện</label>
+            <div class="col-sm-10">
+              <input type="date" #end (change)="checkEnd(end.value)" formControlName="endDay" class="form-control" >
+              <p *ngIf="formEdit.controls.endDay.hasError('required')" style="color: red">Ngày ra viện không được bỏ trống</p>
+              <p *ngIf="formEdit.controls.endDay.hasError('endInvalid')" style="color: red">Ngày ra viện phải lớn hơn hoặc bằng ngày nhập viện</p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Lý Do Nhập Viện</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="reason" class="form-control" >
+              <p *ngIf="formEdit.controls.reason.hasError('required')" style="color: red">Lý do nhập viện không được bỏ trống</p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Phương pháp điều trị</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="method" class="form-control" >
+              <p *ngIf="formEdit.controls.method.hasError('required')" style="color: red">Phương pháp không được bỏ trống</p>
+
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Bác sĩ điều trị</label>
+            <div class="col-sm-10">
+              <select class="form-select" formControlName="doctor" [compareWith]="compareFn">
+                <option *ngFor="let x of doctors" [ngValue]="x">{{x.name}}</option>
+              </select>
+              <p *ngIf="formEdit.controls.doctor.hasError('required')" style="color: red">Hãy chọn bác sĩ</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" [disabled]="formEdit.invalid" class="btn btn-primary" data-bs-dismiss="modal">Xác Nhận</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" id="deletemodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác Nhận Xóa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">
+          <p>Bạn có muốn xóa thông tin bệnh án <b>{{idDelete}}</b> ?</p>
+        </div>
+        <input type="hidden" name="id" id="idDelete">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="delete()">Xóa</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" tabindex="-1" id="addmodal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sửa thông tin bệnh án <i class="fa-sharp fa-solid fa-user"></i></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formAdd" (ngSubmit)="create()">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Mã Bệnh Án</label>
+            <div class="col-sm-10">
+              <input type="text" #id (change)="checkID(id.value)" formControlName="id" class="form-control" name="id" >
+              <p *ngIf="formAdd.controls.id.hasError('required') && formAdd.controls.id.dirty" style="color: red">Mã Bệnh Án không được bỏ trống</p>
+              <p *ngIf="formAdd.controls.id.hasError('pattern') && formAdd.controls.id.dirty" style="color: red"> Mã bệnh án không hợp lệ VD: BA-321</p>
+              <p *ngIf="formAdd.controls.id.hasError('idUnique') && formAdd.controls.id.dirty" style="color: red"> Mã bệnh án {{id.value}} đã bị trùng vui lòng nhập mã khác</p>
+
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Mã bệnh nhân</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="patientID" class="form-control" >
+              <p *ngIf="formAdd.controls.patientID.hasError('required') && formAdd.controls.patientID.dirty" style="color: red">Mã bệnh nhân không được bỏ trống</p>
+              <p *ngIf="formAdd.controls.patientID.hasError('pattern') && formAdd.controls.patientID.dirty" style="color: red"> Mã bệnh nhân không hợp lệ VD: BN-321</p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tên bệnh nhân</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="patientName" class="form-control" >
+              <p *ngIf="formAdd.controls.patientName.hasError('required') && formAdd.controls.patientName.dirty" style="color: red">Tên bệnh nhân không được bỏ trống</p>
+              <p *ngIf="formAdd.controls.patientName.hasError('pattern') && formAdd.controls.patientName.dirty" style="color: red">Tên bệnh nhân không chứa kí tự số</p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ngày Nhập Viện</label>
+            <div class="col-sm-10">
+              <input type="date" #start  formControlName="startDay" class="form-control" >
+              <p *ngIf="formAdd.controls.startDay.hasError('required') && formAdd.controls.startDay.dirty" style="color: red">Ngày nhập viện không được bỏ trống</p>
+              <p *ngIf="formAdd.controls.startDay.hasError('startInvalid') && formAdd.controls.startDay.dirty" style="color: red">Ngày nhập phải trước ngày kết thúc</p>
+
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Ngày Ra Viện</label>
+            <div class="col-sm-10">
+              <input type="date" #end  formControlName="endDay" class="form-control" >
+              <p *ngIf="formAdd.controls.endDay.hasError('required') && formAdd.controls.endDay.dirty" style="color: red">Ngày ra viện không được bỏ trống</p>
+              <p *ngIf="formAdd.controls.endDay.hasError('endInvalid') && formAdd.controls.endDay.dirty" style="color: red">Ngày ra viện phải lớn hơn hoặc bằng ngày nhập viện</p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Lý Do Nhập Viện</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="reason" class="form-control" >
+              <p *ngIf="formAdd.controls.reason.hasError('required') && formAdd.controls.reason.dirty" style="color: red">Lý do nhập viện không được bỏ trống</p>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Phương pháp điều trị</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="method" class="form-control" >
+              <p *ngIf="formAdd.controls.method.hasError('required')  && formAdd.controls.method.dirty" style="color: red">Phương pháp không được bỏ trống</p>
+
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Bác sĩ điều trị</label>
+            <div class="col-sm-10">
+              <select class="form-select" formControlName="doctor" >
+                <option [value]="null" [disabled]="true" [selected]="true" >Hãy Chọn Bác Sĩ </option>
+                <option *ngFor="let x of doctors" [ngValue]="x">{{x.name}} </option>
+              </select>
+              <p *ngIf="formAdd.controls.doctor.hasError('required')  && formAdd.controls.doctor.touched" style="color: red">Vui lòng chọn bác sĩ</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" [disabled]="formAdd.invalid" class="btn btn-primary" data-bs-dismiss="modal">Xác Nhận</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

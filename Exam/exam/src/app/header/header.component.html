@@ -21,21 +21,20 @@
           type="search"
           class="form-control rounded"
           placeholder="Search"
+          [ngModel]="nameSearch"
           style="min-width: 125px;"
-          [value]=""
           #element
-          (keyup.enter)="sendName(element.value,selectElement.value)"
+          (keyup.enter)="search(element.value)"
         />
-        <span  (click)="sendName(element.value,selectElement.value)" style="cursor: pointer" class="input-group-text border-0 d-none d-lg-flex"
+        <span   style="cursor: pointer" class="input-group-text border-0 d-none d-lg-flex"
         ><i class="fas fa-search"></i
         ></span>
       </div>
       <div style="margin-left: 50px"  class="input-group w-auto my-auto d-none d-sm-flex">
-        <select #selectElement class="form-select" (change)="findCategory($event.target)">
-        <option [value]="'zz'"  selected disabled >Danh Mục</option>
-        <option [value]="'all'"  >Tất cả</option>
-        <option  *ngFor="let x of categorys"  [value]="x.id" >{{x.name}}</option>
-      </select></div>
+        <select class="form-select" >
+          <option selected disabled >Danh Mục</option>
+          <option >Tất cả</option>
+        </select></div>
     </div>
 
     <!-- Left elements -->
@@ -43,16 +42,16 @@
     <!-- Center elements -->
     <ul class="navbar-nav flex-row d-none d-md-flex">
       <li class="nav-item me-3 me-lg-1 active">
-        <a routerLink="/product/list" class="nav-link" >
+        <a routerLink="/" class="nav-link" >
           <span><i class="fas fa-home fa-lg"></i></span>
-          <span class="badge rounded-pill badge-notification bg-danger">1</span>
+          <span class="badge rounded-pill badge-notification bg-danger">2</span>
         </a>
       </li>
 
       <li class="nav-item me-3 me-lg-1">
-        <a class="nav-link" routerLink="/product/create" >
-          <span><i class="fa-sharp fa-solid fa-user-plus"></i></span>
-        </a>
+        <p style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#addmodal" class="nav-link"  >
+          <span> <i class="fa-sharp fa-solid fa-user-plus"></i></span>
+        </p>
       </li>
 
       <li class="nav-item me-3 me-lg-1">
@@ -62,7 +61,7 @@
       </li>
 
       <li class="nav-item me-3 me-lg-1">
-        <p style="cursor: pointer"  >
+        <p style="cursor: pointer"  class="nav-link" >
           <span ><i class="fas fa-shopping-bag fa-lg"></i></span>
         </p>
       </li>
@@ -96,18 +95,6 @@
         </a>
       </li>
       <li class="nav-item dropdown me-3 me-lg-1">
-<!--        <a-->
-<!--          class="nav-link dropdown-toggle hidden-arrow"-->
-<!--          href="#"-->
-<!--          id="navbarDropdownMenuLink"-->
-<!--          role="button"-->
-<!--          data-mdb-toggle="dropdown"-->
-<!--          aria-expanded="false"-->
-<!--        >-->
-<!--          <i class="fas fa-comments fa-lg"></i>-->
-
-<!--          <span class="badge rounded-pill badge-notification bg-danger">6</span>-->
-<!--        </a>-->
         <ul
           class="dropdown-menu dropdown-menu-end"
           aria-labelledby="navbarDropdownMenuLink"
@@ -124,17 +111,6 @@
         </ul>
       </li>
       <li class="nav-item dropdown me-3 me-lg-1">
-<!--        <a-->
-<!--          class="nav-link dropdown-toggle hidden-arrow"-->
-<!--          href="#"-->
-<!--          id="navbarDropdownMenuLink"-->
-<!--          role="button"-->
-<!--          data-mdb-toggle="dropdown"-->
-<!--          aria-expanded="false"-->
-<!--        >-->
-<!--          <i class="fas fa-bell fa-lg"></i>-->
-<!--          <span class="badge rounded-pill badge-notification bg-danger">12</span>-->
-<!--        </a>-->
         <ul
           class="dropdown-menu dropdown-menu-end"
           aria-labelledby="navbarDropdownMenuLink"
@@ -180,3 +156,4 @@
     <!-- Right elements -->
   </div>
 </nav>
+

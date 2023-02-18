@@ -42,4 +42,9 @@ export class NavBarComponent implements OnInit {
       this.router.navigate(['/product/list/']);
     }
   }
+
+  sort(oder: string) {
+    // @ts-ignore
+    this.router.navigate(['/product/sort/' + oder]);
+  }
 }

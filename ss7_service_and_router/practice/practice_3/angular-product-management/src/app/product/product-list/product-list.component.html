@@ -34,7 +34,7 @@
       <h5>{{x.name}}</h5>
       <b class="card-text">{{x.category.name}}</b>
       <p>Đơn Giá: {{x.price}}đ</p>
-      <p>{{x.description}}         <button style="position: absolute;right: 20px" (click)="checkIdForDelete(x.id,x.name)" data-bs-toggle="modal" data-bs-target="#deletemodal" class=" btn-outline-danger"><i class="fa-sharp fa-solid fa-circle-xmark"></i></button>
+      <p>{{x.description}}        <button style="position: absolute;right: 20px" (click)="checkIdForDelete(x.id,x.name)" data-bs-toggle="modal" data-bs-target="#deletemodal" class=" btn-outline-danger"><i class="fa-sharp fa-solid fa-circle-xmark"></i></button>
       </p>
       <div style="width: 100%">
         <button style="margin-left: 90px" class="btn btn-outline-success " (click)="buy(x.name)">Mua</button>
